@@ -59,5 +59,9 @@ public class UserList {
             if(!user.isActive())System.out.println(user);            
         }        
     }
+    ArrayList<User> sortByKey()
+    {
+        return list;
+    }
     
 }

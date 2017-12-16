@@ -77,6 +77,85 @@ public class User {
             return "User activated";
         }
     }
+    int compare(User user)//by ID
+    {
+        if(id==user.id)
+        {
+            return 0;
+        }
+        else if(id>user.id)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    int compare(User user, String key)
+    {
+        int temp;
+        switch(key)
+        {
+            case "name":
+                temp = name.compareToIgnoreCase(user.name);
+                if(temp==0)
+                {
+                    return compare(user);
+                }
+                else if(temp>0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }                
+            case "surname":
+                temp = surname.compareToIgnoreCase(user.surname);
+                if(temp==0)
+                {
+                    return compare(user, "name");
+                }
+                else if(temp>0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }  
+            case "join":                
+                temp = joindate.compareTo(user.joindate);
+                if(temp==0)
+                {
+                    return compare(user);
+                }
+                else if(temp>0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }                
+            case "contract":
+                temp = contract.compareTo(user.contract);
+                if(temp==0)
+                {
+                    return compare(user);
+                }
+                else if(temp>0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                } 
+            default: return compare(user);
+        }
+    }
     @Override
     public String toString()
     {
