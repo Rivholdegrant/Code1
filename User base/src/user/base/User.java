@@ -11,7 +11,7 @@ import java.util.Calendar;
  *
  * @author Rivs
  */
-public class User {
+public class User implements Comparable<User>{
     private String name, surname;
     private String site = "N/A";
     private final int id;
@@ -160,5 +160,10 @@ public class User {
     public String toString()
     {
         return "ID: " + String.format("%06d ", id) + String.format("%17s, %15s", surname, name) + "\t @" + String.format("%.3S", site) + " | Joined: " + String.format("%1$td/%1$tm/%1$tY", joindate) + " | End day: " + String.format("%1$td/%1$tm/%1$tY ", contract) + (isActive()? "": "Deactivated") ;
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return this.compare(o, "surname");
     }
 }

@@ -6,6 +6,7 @@
 package user.base;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -59,9 +60,11 @@ public class UserList {
             if(!user.isActive())System.out.println(user);            
         }        
     }
-    ArrayList<User> sortByKey()
+    ArrayList<User> sort()
     {
-        return list;
+        ArrayList<User> temp = (ArrayList<User>)list.clone();
+        Collections.sort(temp);
+        return temp;
     }
     
 }

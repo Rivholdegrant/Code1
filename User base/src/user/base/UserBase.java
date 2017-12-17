@@ -42,6 +42,8 @@ public class UserBase {
         list.printInactiveList(list.getList());
         System.out.println();
         
+        System.out.println("Let's sort list by surname");
+        list.printList(list.sort());        
     }
     
 }
