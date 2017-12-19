@@ -5,6 +5,8 @@
  */
 package user.base;
 
+import java.io.IOException;
+
 /**
  *
  * @author Rivs
@@ -14,9 +16,9 @@ public class UserBase {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         UserList list = new UserList();
-        
+        /*
         list.addUser("Andrzej", "Strzelba");
         list.getUser(0).setJoinDate(12, 9, 2017);
         list.getUser(0).setContractDate(12, 9, 2018);
@@ -43,7 +45,16 @@ public class UserBase {
         System.out.println();
         
         System.out.println("Let's sort list by surname");
-        list.printList(list.sort());        
+        list.printList(list.sort());  
+        
+        System.out.println(list.filePath);
+        list.saveBase();
+        */
+        
+        list.printList(list.getList());
+        list.loadFile();
+        list.printList(list.getList());
+        
     }
     
 }

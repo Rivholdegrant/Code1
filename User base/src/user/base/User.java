@@ -5,13 +5,15 @@
  */
 package user.base;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  *
  * @author Rivs
  */
-public class User implements Comparable<User>{
+public class User implements Comparable<User>, Serializable
+{
     private String name, surname;
     private String site = "N/A";
     private final int id;
