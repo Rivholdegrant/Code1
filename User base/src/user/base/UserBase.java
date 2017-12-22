@@ -18,41 +18,40 @@ public class UserBase {
      */
     public static void main(String[] args) throws IOException {
         UserList list = new UserList();
-        /*
-        list.addUser("Andrzej", "Strzelba");
-        list.getUser(0).setJoinDate(12, 9, 2017);
-        list.getUser(0).setContractDate(12, 9, 2018);
-        list.getUser(0).assignSite("Wrocław");
-        
-        list.addUser("Domino", "Jachaś", 24,12,2015,24,12,2019);
-        list.addUser("Sebastian", "Strzalkowski", 31,2,2016,31,2,2020);
-        list.getList().get(list.getList().size()-1).assignSite("Kraków") ;
-        list.getUser(1).deactivate();
+//        
+//        list.addUser("Andrzej", "Strzelba");
+//        list.getUser(0).setJoinDate(12, 9, 2017);
+//        list.getUser(0).setContractDate(12, 9, 2018);
+//        list.getUser(0).assignSite("Wrocław");
+//        
+//        list.addUser("Domino", "Jachaś", 24,12,2015,24,12,2019);
+//        list.addUser("Sebastian", "Strzalkowski", 31,2,2016,31,2,2020);
+//        list.getList().get(list.getList().size()-1).assignSite("Kraków") ;
+//        list.getUser(1).deactivate();
+//        
+//        list.printList(list.getList());
+//        System.out.println();
+//        list.printActiveList(list.getList());
+//        System.out.println();
+//                
+//        list.addUser("Tomuś", "Robaczek", 22,9,2017,22,9,2018);
+//        list.getList().get(list.getList().size()-1).assignSite("Kraków") ;
+//        
+//        list.printList(list.getList());
+//        System.out.println();
+//        list.printActiveList(list.getList());
+//        System.out.println();
+//        list.printInactiveList(list.getList());
+//        System.out.println();
+//        
+//        System.out.println("Let's sort list by surname");
+//        list.printList(list.sort());  
+//              
+//        list.saveBase();
+//        
         
         list.printList(list.getList());
-        System.out.println();
-        list.printActiveList(list.getList());
-        System.out.println();
-                
-        list.addUser("Tomuś", "Robaczek", 22,9,2017,22,9,2018);
-        list.getList().get(list.getList().size()-1).assignSite("Kraków") ;
-        
-        list.printList(list.getList());
-        System.out.println();
-        list.printActiveList(list.getList());
-        System.out.println();
-        list.printInactiveList(list.getList());
-        System.out.println();
-        
-        System.out.println("Let's sort list by surname");
-        list.printList(list.sort());  
-        
-        System.out.println(list.filePath);
-        list.saveBase();
-        */
-        
-        list.printList(list.getList());
-        list.loadFile();
+        System.out.println(list.loadFile());
         list.printList(list.getList());
         
     }

@@ -74,7 +74,8 @@ public class UserList {
         Collections.sort(temp);
         return temp;
     }
-    String filePath = System.getProperty("user.dir")+"\\database.dab" ;
+    //String filePath = System.getProperty("user.dir")+"\\database.dab" ;
+    String filePath = "database.dab" ;
     boolean saveBase() throws FileNotFoundException, IOException
     {
         try{            
