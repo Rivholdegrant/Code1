@@ -25,6 +25,7 @@ public class User implements Comparable<User>, Serializable
         this.name=name;
         this.surname=surname;
         this.id=id;
+        contract.set(contract.YEAR, contract.get(contract.YEAR)+1);
         isActive=true;
     }
     User(String name, String surname, int id, int joinday, int joinmonth, int joinyear, int contday, int contmonth, int contyear)

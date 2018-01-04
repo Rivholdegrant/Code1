@@ -47,12 +47,37 @@ public class UserList {
     {        
         return list.isEmpty() ? 1 : list.size()+1;
     }
+    void printList()
+    {
+        for(User user : list)
+        {
+            System.out.println(user);
+        }        
+    }
     void printList(ArrayList<User> list)
     {
         for(User user : list)
         {
             System.out.println(user);
         }        
+    }
+    void printUser(int index)
+    {
+    	try
+    	{
+    	if(index<=list.size())    	
+    	{
+    		System.out.println(list.get(index-1));    		
+    	}
+    	else
+    	{
+    		System.out.println("Wrong index. List size: "+ list.size());
+    	}
+    	}catch(IndexOutOfBoundsException e)
+    	{
+    		System.out.println("Wrong index. List size: "+ list.size());
+    	}
+    	
     }
     void printActiveList(ArrayList<User> list)
     {
@@ -81,9 +106,10 @@ public class UserList {
         try{            
             FileOutputStream file = new FileOutputStream(filePath);
             ObjectOutputStream temp = new ObjectOutputStream(file);
-            temp.writeObject(list);                         
+            temp.writeObject(list);
+            temp.close();
         }catch(Exception e)
-        {
+        {        	
             return false;
         }
         return true;
@@ -94,8 +120,9 @@ public class UserList {
             FileInputStream file = new FileInputStream(filePath);
             ObjectInputStream temp = new ObjectInputStream(file);            
             list = (ArrayList<User>) temp.readObject();
+            temp.close();
         }catch(Exception e)
-        {
+        {        	
             return false;
         }
         return true;
