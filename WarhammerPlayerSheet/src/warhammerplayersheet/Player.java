@@ -5,11 +5,13 @@
  */
 package warhammerplayersheet;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Rivs
  */
-public class Player {
+public class Player implements Serializable{
     //Basic info
     private String name;
     private Race race;

@@ -5,11 +5,13 @@
  */
 package warhammerplayersheet;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Rivs
  */
-public class Stats {
+public class Stats implements Serializable{
        
     private final int[] stats;
     

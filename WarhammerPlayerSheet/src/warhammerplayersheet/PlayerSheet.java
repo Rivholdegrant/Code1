@@ -5,6 +5,11 @@
  */
 package warhammerplayersheet;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Rivs
@@ -14,8 +19,14 @@ public class PlayerSheet extends javax.swing.JFrame {
     /**
      * Creates new form PlayerSheet
      */
-    public PlayerSheet() {
-        initComponents();
+    ArrayList<Player> players = new ArrayList<Player>();
+    ArrayList<Profession> professions = new ArrayList<Profession>();
+    Race races = new Race();
+    ArrayList<Skill> skills = new ArrayList<Skill>();
+    ArrayList<Talent> talents = new ArrayList<Talent>();
+    ArrayList<Equipment> equipment = new ArrayList<Equipment>();
+    public PlayerSheet(){
+        initComponents();          
     }
 
     /**
@@ -28,6 +39,10 @@ public class PlayerSheet extends javax.swing.JFrame {
     private void initComponents() {
 
         new_player = new javax.swing.JButton();
+        save = new javax.swing.JButton();
+        load = new javax.swing.JButton();
+        addAsset = new javax.swing.JButton();
+        addAsset1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -39,13 +54,46 @@ public class PlayerSheet extends javax.swing.JFrame {
             }
         });
 
+        save.setText("Zapisz");
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+
+        load.setText("Wczytaj");
+        load.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadActionPerformed(evt);
+            }
+        });
+
+        addAsset.setText("Dodaj...");
+        addAsset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAssetActionPerformed(evt);
+            }
+        });
+
+        addAsset1.setText("Przeglądaj...");
+        addAsset1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addAsset1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(327, Short.MAX_VALUE)
-                .addComponent(new_player)
+                .addContainerGap(324, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(new_player, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(load, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAsset, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addAsset1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -53,7 +101,15 @@ public class PlayerSheet extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(new_player)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(save)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(load)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addAsset)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addAsset1)
+                .addContainerGap(342, Short.MAX_VALUE))
         );
 
         pack();
@@ -61,9 +117,102 @@ public class PlayerSheet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void new_playerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_playerActionPerformed
-        new PlayerCreation().setVisible(true);
+        new PlayerCreation(this).setVisible(true);
     }//GEN-LAST:event_new_playerActionPerformed
 
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        
+        Object[] temptab = new Object[6];        
+        temptab[0] = players;
+        temptab[1] = professions;
+        temptab[2] = races;
+        temptab[3] = skills;
+        temptab[4] = talents;
+        temptab[5] = equipment;
+        try{            
+            FileOutputStream file = new FileOutputStream(filePath);
+            ObjectOutputStream temp = new ObjectOutputStream(file);
+            temp.writeObject(temptab);            
+            temp.close();
+            System.out.println("Zapisano w "+filePath);
+        }catch(Exception e)
+        {
+            return;
+        }        
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
+        Object[] temptab = new Object[6];
+        try{ 
+            System.out.println("Wczytywanie z "+filePath);
+            FileInputStream file = new FileInputStream(filePath);
+            ObjectInputStream temp = new ObjectInputStream(file);            
+            temptab = (Object[]) temp.readObject();
+            temp.close();            
+            players = (ArrayList<Player>)temptab[0];
+            professions= (ArrayList<Profession>)temptab[1];
+            races= (Race)temptab[2];
+            skills= (ArrayList<Skill>)temptab[3];
+            talents= (ArrayList<Talent>)temptab[4];
+            equipment= (ArrayList<Equipment>)temptab[5];
+            
+        }catch(Exception e)
+        {        	
+            return;
+        }
+    }//GEN-LAST:event_loadActionPerformed
+
+    private void addAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAssetActionPerformed
+        new AddAsset(professions, skills, talents).setVisible(true);
+    }//GEN-LAST:event_addAssetActionPerformed
+
+    private void addAsset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAsset1ActionPerformed
+        new BrowseAssets(professions, skills, talents).setVisible(true);
+    }//GEN-LAST:event_addAsset1ActionPerformed
+    String filePath = "database.dab" ;
+    boolean save() throws FileNotFoundException, IOException
+    {
+        Object[] temptab = new ArrayList[6];        
+        temptab[0] = players;
+        temptab[1] = professions;
+        temptab[2] = races;
+        temptab[3] = skills;
+        temptab[4] = talents;
+        temptab[5] = equipment;
+        try{            
+            FileOutputStream file = new FileOutputStream(filePath);
+            ObjectOutputStream temp = new ObjectOutputStream(file);
+            temp.writeObject(temptab);
+            temp.close();
+            System.out.println("Zapisano w "+file.toString());
+        }catch(Exception e)
+        {
+            return false;
+        }
+        return true;
+    }
+    boolean load() throws FileNotFoundException, IOException
+    {        
+        Object[] temptab = new ArrayList[6];
+        try{ 
+            FileInputStream file = new FileInputStream(filePath);
+            ObjectInputStream temp = new ObjectInputStream(file);            
+            temptab = (Object[]) temp.readObject();
+            temp.close();
+            players = (ArrayList<Player>)temptab[0];
+            professions= (ArrayList<Profession>)temptab[1];
+            races= (Race)temptab[2];
+            skills= (ArrayList<Skill>)temptab[3];
+            talents= (ArrayList<Talent>)temptab[4];
+            equipment= (ArrayList<Equipment>)temptab[5];
+            
+        }catch(Exception e)
+        {        	
+            return false;
+        }
+        
+        return true;
+    }
     /**
      * @param args the command line arguments
      */
@@ -94,12 +243,16 @@ public class PlayerSheet extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayerSheet().setVisible(true);
+                new PlayerSheet().setVisible(true);                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addAsset;
+    private javax.swing.JButton addAsset1;
+    private javax.swing.JButton load;
     private javax.swing.JButton new_player;
+    private javax.swing.JButton save;
     // End of variables declaration//GEN-END:variables
 }

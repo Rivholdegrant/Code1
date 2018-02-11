@@ -5,10 +5,12 @@
  */
 package warhammerplayersheet;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Rivs
  */
-class Talent {
+class Talent implements Serializable{
     
 }

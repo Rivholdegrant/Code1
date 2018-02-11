@@ -5,11 +5,13 @@
  */
 package warhammerplayersheet;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Rivs
  */
-public class Profession {
+public class Profession implements Serializable{
     private String name;
     private String description;
     private Stats stats;    
@@ -21,47 +23,47 @@ public class Profession {
     
     public Profession(String name, String description, Stats stats, Skill[] skills, Talent[] talents, Equipment[] equipment, Profession[] entries, Profession[] exits)
     {
-        name        = this.name;     
-        description = this.description;
-        stats       = this.stats;
-        skills      = this.skills;
-        talents     = this.talents;
-        equipment   = this.equipment;
-        entries     = this.entries;
-        exits       = this.exits;
+        this.name        = name;     
+        this.description = description;
+        this.stats       = stats;
+        this.skills      = skills;
+        this.talents     = talents;
+        this.equipment   = equipment;
+        this.entries     = entries;
+        this.exits       = exits;
     }
     public Profession(String name)
     {
-        name        = this.name; 
+        this.name        = name; 
     }
     //setters
     void setDescription(String description)
     {
-        description = this.description;               
+        this.description = description;               
     }
     void setStats(Stats stats)
     {
-        stats       = this.stats;
+        this.stats       = stats;
     }
     void setSkills(Skill[] skills)
     {
-        skills      = this.skills;
+        this.skills      = skills;
     }
     void setTalents(Talent[] talents)
     {
-        talents     = this.talents;
+        this.talents     = talents;
     }
     void setEquipment(Equipment[] equipment)
     {
-        equipment   = this.equipment;
+        this.equipment   = equipment;
     }
     void setEntries(Profession[] entries)
     {
-        entries     = this.entries;
+        this.entries     = entries;
     }
     void setExits(Profession[] exits)
     {
-        exits     = this.exits;
+        this.exits     = exits;
     }
     //getters
     String getName()
@@ -95,6 +97,11 @@ public class Profession {
     Profession[] getExits()
     {
         return exits;
+    }
+    @Override
+    public String toString()
+    {
+        return name;
     }
            
 }
