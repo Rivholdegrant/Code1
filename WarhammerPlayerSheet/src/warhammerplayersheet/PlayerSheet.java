@@ -7,8 +7,14 @@ package warhammerplayersheet;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -38,6 +44,7 @@ public class PlayerSheet extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         new_player = new javax.swing.JButton();
         save = new javax.swing.JButton();
         load = new javax.swing.JButton();
@@ -121,44 +128,42 @@ public class PlayerSheet extends javax.swing.JFrame {
     }//GEN-LAST:event_new_playerActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        
-        Object[] temptab = new Object[6];        
-        temptab[0] = players;
-        temptab[1] = professions;
-        temptab[2] = races;
-        temptab[3] = skills;
-        temptab[4] = talents;
-        temptab[5] = equipment;
-        try{            
-            FileOutputStream file = new FileOutputStream(filePath);
-            ObjectOutputStream temp = new ObjectOutputStream(file);
-            temp.writeObject(temptab);            
-            temp.close();
-            System.out.println("Zapisano w "+filePath);
-        }catch(Exception e)
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new java.io.File("."));
+        fc.setDialogTitle("Zapisz");
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setApproveButtonText("Zapisz");
+        fc.setApproveButtonToolTipText("Zapisz w pliku");
+        fc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("WarhammerPlayerSheet database", "wpsdb");
+        fc.addChoosableFileFilter(filter);
+        if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
         {
-            return;
-        }        
+            try {
+                save(fc.getSelectedFile().getAbsolutePath());
+            } catch (IOException ex) {
+                Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_saveActionPerformed
 
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
-        Object[] temptab = new Object[6];
-        try{ 
-            System.out.println("Wczytywanie z "+filePath);
-            FileInputStream file = new FileInputStream(filePath);
-            ObjectInputStream temp = new ObjectInputStream(file);            
-            temptab = (Object[]) temp.readObject();
-            temp.close();            
-            players = (ArrayList<Player>)temptab[0];
-            professions= (ArrayList<Profession>)temptab[1];
-            races= (Race)temptab[2];
-            skills= (ArrayList<Skill>)temptab[3];
-            talents= (ArrayList<Talent>)temptab[4];
-            equipment= (ArrayList<Equipment>)temptab[5];
-            
-        }catch(Exception e)
-        {        	
-            return;
+        JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new java.io.File("."));
+        fc.setDialogTitle("Otwórz");
+        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setApproveButtonText("Otwórz");
+        fc.setApproveButtonToolTipText("Otwórz z pliku");
+        fc.setAcceptAllFileFilterUsed(false);  
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("WarhammerPlayerSheet database", "wpsdb");
+        fc.addChoosableFileFilter(filter);
+        if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+        {
+            try {
+                load(fc.getSelectedFile().getAbsolutePath());
+            } catch (IOException ex) {
+                Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_loadActionPerformed
 
@@ -169,36 +174,48 @@ public class PlayerSheet extends javax.swing.JFrame {
     private void addAsset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAsset1ActionPerformed
         new BrowseAssets(professions, skills, talents).setVisible(true);
     }//GEN-LAST:event_addAsset1ActionPerformed
-    String filePath = "database.dab" ;
-    boolean save() throws FileNotFoundException, IOException
+    boolean save(String filePath) throws FileNotFoundException, IOException
     {
-        Object[] temptab = new ArrayList[6];        
+        Object[] temptab = new Object[6];        
         temptab[0] = players;
         temptab[1] = professions;
         temptab[2] = races;
         temptab[3] = skills;
         temptab[4] = talents;
         temptab[5] = equipment;
-        try{            
-            FileOutputStream file = new FileOutputStream(filePath);
-            ObjectOutputStream temp = new ObjectOutputStream(file);
+        try{
+            File filex = new File(filePath);            
+            if(filex.exists())
+            {    
+                Object[] options = {"Poproszę", "Um, nope"};
+                int optionPane = JOptionPane.showOptionDialog(this, "Nadpisać istniejący plik?", "Istniejący plik", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);               
+                if(optionPane != 0)
+                {
+                    System.out.println("Nie nadpisano pliku");
+                    return false;
+                }                  
+            }
+            String extension = ".wpsdb";
+            FileOutputStream file = new FileOutputStream(filePath+extension);
+            ObjectOutputStream temp = new ObjectOutputStream(file);            
             temp.writeObject(temptab);
             temp.close();
-            System.out.println("Zapisano w "+file.toString());
+            
+            System.out.println("Zapisano w "+filePath+extension);
         }catch(Exception e)
         {
             return false;
         }
         return true;
     }
-    boolean load() throws FileNotFoundException, IOException
+    boolean load(String filePath) throws FileNotFoundException, IOException
     {        
-        Object[] temptab = new ArrayList[6];
-        try{ 
+        Object[] temptab = new Object[6];
+        try{             
             FileInputStream file = new FileInputStream(filePath);
-            ObjectInputStream temp = new ObjectInputStream(file);            
-            temptab = (Object[]) temp.readObject();
-            temp.close();
+            ObjectInputStream temp = new ObjectInputStream(file);
+            temptab = (Object[]) temp.readObject();            
+            temp.close();            
             players = (ArrayList<Player>)temptab[0];
             professions= (ArrayList<Profession>)temptab[1];
             races= (Race)temptab[2];
@@ -206,11 +223,16 @@ public class PlayerSheet extends javax.swing.JFrame {
             talents= (ArrayList<Talent>)temptab[4];
             equipment= (ArrayList<Equipment>)temptab[5];
             
-        }catch(Exception e)
-        {        	
+        }catch(FileNotFoundException e)
+        {   
+            System.out.println("Wczytywanie z "+filePath+" nie powiodło się. Nie znaleziono pliku.");     	
             return false;
         }
-        
+        catch(Exception e)
+        {
+            return false;
+        }
+        System.out.println("Wczytywanie z "+filePath);
         return true;
     }
     /**
@@ -243,7 +265,7 @@ public class PlayerSheet extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayerSheet().setVisible(true);                
+                new PlayerSheet().setVisible(true);  
             }
         });
     }
@@ -251,6 +273,7 @@ public class PlayerSheet extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAsset;
     private javax.swing.JButton addAsset1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JButton load;
     private javax.swing.JButton new_player;
     private javax.swing.JButton save;

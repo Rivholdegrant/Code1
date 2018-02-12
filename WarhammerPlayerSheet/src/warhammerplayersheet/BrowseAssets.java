@@ -33,6 +33,7 @@ public class BrowseAssets extends javax.swing.JFrame {
         labelAdd = new javax.swing.JLabel();
         addSkill = new javax.swing.JButton();
         AddTalent = new javax.swing.JButton();
+        AddTalent1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -51,6 +52,8 @@ public class BrowseAssets extends javax.swing.JFrame {
 
         AddTalent.setText("Zdolności");
 
+        AddTalent1.setText("Postacie");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,6 +67,8 @@ public class BrowseAssets extends javax.swing.JFrame {
                         .addComponent(addSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AddTalent, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AddTalent1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(labelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -77,7 +82,8 @@ public class BrowseAssets extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addProfession)
                     .addComponent(addSkill)
-                    .addComponent(AddTalent)))
+                    .addComponent(AddTalent)
+                    .addComponent(AddTalent1)))
         );
 
         pack();
@@ -126,6 +132,7 @@ public class BrowseAssets extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddTalent;
+    private javax.swing.JButton AddTalent1;
     private javax.swing.JButton addProfession;
     private javax.swing.JButton addSkill;
     private javax.swing.JLabel labelAdd;
