@@ -263,8 +263,7 @@ public class Stats implements Serializable{
     String getPPdesc()
     {
         return "Punkty przeznaczenia";
-    }
-    
+    }    
 }
     
 

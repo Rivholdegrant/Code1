@@ -52,6 +52,7 @@ public class PlayerSheet extends javax.swing.JFrame {
         addAsset1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Fantasy RolePlay Warhammer");
         setResizable(false);
 
         new_player.setText("Nowy gracz");
@@ -131,7 +132,7 @@ public class PlayerSheet extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new java.io.File("."));
         fc.setDialogTitle("Zapisz");
-        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fc.setApproveButtonText("Zapisz");
         fc.setApproveButtonToolTipText("Zapisz w pliku");
         fc.setAcceptAllFileFilterUsed(false);
@@ -151,7 +152,7 @@ public class PlayerSheet extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new java.io.File("."));
         fc.setDialogTitle("Otwórz");
-        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
         fc.setApproveButtonText("Otwórz");
         fc.setApproveButtonToolTipText("Otwórz z pliku");
         fc.setAcceptAllFileFilterUsed(false);  
@@ -168,11 +169,11 @@ public class PlayerSheet extends javax.swing.JFrame {
     }//GEN-LAST:event_loadActionPerformed
 
     private void addAssetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAssetActionPerformed
-        new AddAsset(professions, skills, talents).setVisible(true);
+        new AddAsset(professions, skills, talents, equipment).setVisible(true);
     }//GEN-LAST:event_addAssetActionPerformed
 
     private void addAsset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAsset1ActionPerformed
-        new BrowseAssets(professions, skills, talents).setVisible(true);
+        new BrowseAssets(professions, skills, talents, players).setVisible(true);
     }//GEN-LAST:event_addAsset1ActionPerformed
     boolean save(String filePath) throws FileNotFoundException, IOException
     {
@@ -195,13 +196,17 @@ public class PlayerSheet extends javax.swing.JFrame {
                     return false;
                 }                  
             }
-            String extension = ".wpsdb";
-            FileOutputStream file = new FileOutputStream(filePath+extension);
+            String extension = ".wpsdb";                     
+            if(!filePath.endsWith(extension))
+            {
+                filePath+=extension;
+            }                
+            FileOutputStream file = new FileOutputStream(filePath);
             ObjectOutputStream temp = new ObjectOutputStream(file);            
             temp.writeObject(temptab);
             temp.close();
             
-            System.out.println("Zapisano w "+filePath+extension);
+            System.out.println("Zapisano w "+filePath);
         }catch(Exception e)
         {
             return false;
@@ -230,9 +235,15 @@ public class PlayerSheet extends javax.swing.JFrame {
         }
         catch(Exception e)
         {
+            System.out.println(e.getMessage());
             return false;
         }
         System.out.println("Wczytywanie z "+filePath);
+        System.out.println("Graczy: "+players.size());
+        System.out.println("Profesji: "+professions.size());
+        System.out.println("Umiejętności: "+skills.size());
+        System.out.println("Zdolności: "+talents.size());
+        System.out.println("Ekwipunek: "+equipment.size());
         return true;
     }
     /**

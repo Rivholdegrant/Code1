@@ -32,7 +32,7 @@ public class Player implements Serializable{
     
     public Player(String name, Race race)
     {
-        name=this.name;
+        name = this.name;
         race = this.race;
         //all race objects need to be created before in app and referenced to constructor from drop-down list in appwindow
     }

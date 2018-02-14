@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Przegl&#x105;daj"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -28,13 +29,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="addProfession" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="browseProfession" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="addSkill" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="browseSkill" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="AddTalent" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="browseTalent" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="AddTalent1" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="browseTalent1" min="-2" pref="120" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="labelAdd" max="32767" attributes="0"/>
@@ -50,22 +51,22 @@
               <Component id="labelAdd" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="addProfession" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="addSkill" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="AddTalent" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="AddTalent1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="browseProfession" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="browseSkill" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="browseTalent" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="browseTalent1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="addProfession">
+    <Component class="javax.swing.JButton" name="browseProfession">
       <Properties>
         <Property name="text" type="java.lang.String" value="Profesje"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addProfessionActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseProfessionActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labelAdd">
@@ -74,17 +75,20 @@
         <Property name="text" type="java.lang.String" value="Przegl&#x105;daj"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="addSkill">
+    <Component class="javax.swing.JButton" name="browseSkill">
       <Properties>
         <Property name="text" type="java.lang.String" value="Umiej&#x119;tno&#x15b;ci"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseSkillActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="AddTalent">
+    <Component class="javax.swing.JButton" name="browseTalent">
       <Properties>
         <Property name="text" type="java.lang.String" value="Zdolno&#x15b;ci"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="AddTalent1">
+    <Component class="javax.swing.JButton" name="browseTalent1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Postacie"/>
       </Properties>

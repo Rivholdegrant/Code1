@@ -16,8 +16,14 @@ public class AddAsset extends javax.swing.JFrame {
     /**
      * Creates new form AddAsset
      */
-    public AddAsset(ArrayList professions, ArrayList skills, ArrayList talents) {
+    ArrayList professions, skills, talents, equipment;
+    
+    public AddAsset(ArrayList professions, ArrayList skills, ArrayList talents, ArrayList equipment) {
         initComponents();
+        this.professions = professions;
+        this.skills = skills;
+        this.talents = talents;
+        this.equipment=equipment;
     }
 
     /**
@@ -35,14 +41,25 @@ public class AddAsset extends javax.swing.JFrame {
         AddTalent = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Dodaj element");
         setResizable(false);
 
         addProfession.setText("Profesję");
+        addProfession.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addProfessionActionPerformed(evt);
+            }
+        });
 
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAdd.setText("Dodaj");
 
         addSkill.setText("Umiejętność");
+        addSkill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addSkillActionPerformed(evt);
+            }
+        });
 
         AddTalent.setText("Zdolność");
 
@@ -79,41 +96,18 @@ public class AddAsset extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addProfessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProfessionActionPerformed
+        new AddProfession(professions, skills, talents, equipment).setVisible(true);
+    }//GEN-LAST:event_addProfessionActionPerformed
+
+    private void addSkillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSkillActionPerformed
+        new AddSkill(skills).setVisible(true);
+    }//GEN-LAST:event_addSkillActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddAsset.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddAsset.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddAsset.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddAsset.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new AddAsset().setVisible(true);
-            }
-        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddTalent;
     private javax.swing.JButton addProfession;

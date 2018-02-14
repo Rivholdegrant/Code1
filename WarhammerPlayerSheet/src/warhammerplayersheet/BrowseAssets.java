@@ -16,8 +16,13 @@ public class BrowseAssets extends javax.swing.JFrame {
     /**
      * Creates new form AddAsset
      */
-    public BrowseAssets(ArrayList professions, ArrayList skills, ArrayList talents) {
+    ArrayList professions, skills, talents, equipment, players;
+    public BrowseAssets(ArrayList professions, ArrayList skills, ArrayList talents, ArrayList players) {
         initComponents();
+        this.professions = professions;
+        this.skills = skills;
+        this.talents = talents;
+        this.equipment=equipment;
     }
 
     /**
@@ -29,30 +34,36 @@ public class BrowseAssets extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addProfession = new javax.swing.JButton();
+        browseProfession = new javax.swing.JButton();
         labelAdd = new javax.swing.JLabel();
-        addSkill = new javax.swing.JButton();
-        AddTalent = new javax.swing.JButton();
-        AddTalent1 = new javax.swing.JButton();
+        browseSkill = new javax.swing.JButton();
+        browseTalent = new javax.swing.JButton();
+        browseTalent1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Przeglądaj");
         setResizable(false);
 
-        addProfession.setText("Profesje");
-        addProfession.addActionListener(new java.awt.event.ActionListener() {
+        browseProfession.setText("Profesje");
+        browseProfession.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addProfessionActionPerformed(evt);
+                browseProfessionActionPerformed(evt);
             }
         });
 
         labelAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAdd.setText("Przeglądaj");
 
-        addSkill.setText("Umiejętności");
+        browseSkill.setText("Umiejętności");
+        browseSkill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseSkillActionPerformed(evt);
+            }
+        });
 
-        AddTalent.setText("Zdolności");
+        browseTalent.setText("Zdolności");
 
-        AddTalent1.setText("Postacie");
+        browseTalent1.setText("Postacie");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,13 +73,13 @@ public class BrowseAssets extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(addProfession, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(browseProfession, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(browseSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AddTalent, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(browseTalent, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AddTalent1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(browseTalent1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(labelAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -80,61 +91,34 @@ public class BrowseAssets extends javax.swing.JFrame {
                 .addComponent(labelAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addProfession)
-                    .addComponent(addSkill)
-                    .addComponent(AddTalent)
-                    .addComponent(AddTalent1)))
+                    .addComponent(browseProfession)
+                    .addComponent(browseSkill)
+                    .addComponent(browseTalent)
+                    .addComponent(browseTalent1)))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addProfessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProfessionActionPerformed
+    private void browseProfessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseProfessionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addProfessionActionPerformed
+    }//GEN-LAST:event_browseProfessionActionPerformed
+
+    private void browseSkillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseSkillActionPerformed
+        new BrowseSkills(skills).setVisible(true);
+    }//GEN-LAST:event_browseSkillActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BrowseAssets.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BrowseAssets.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BrowseAssets.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BrowseAssets.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                //new AddAsset().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddTalent;
-    private javax.swing.JButton AddTalent1;
-    private javax.swing.JButton addProfession;
-    private javax.swing.JButton addSkill;
+    private javax.swing.JButton browseProfession;
+    private javax.swing.JButton browseSkill;
+    private javax.swing.JButton browseTalent;
+    private javax.swing.JButton browseTalent1;
     private javax.swing.JLabel labelAdd;
     // End of variables declaration//GEN-END:variables
 }
