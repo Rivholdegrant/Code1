@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -30,9 +31,10 @@ public class PlayerSheet extends javax.swing.JFrame {
     Race races = new Race();
     ArrayList<Skill> skills = new ArrayList<Skill>();
     ArrayList<Talent> talents = new ArrayList<Talent>();
-    ArrayList<Equipment> equipment = new ArrayList<Equipment>();
-    public PlayerSheet(){
-        initComponents();          
+    ArrayList<Equipment> equipment = new ArrayList<Equipment>();    
+    public PlayerSheet() throws IOException{
+        initComponents();
+        load();
     }
 
     /**
@@ -51,9 +53,14 @@ public class PlayerSheet extends javax.swing.JFrame {
         addAsset = new javax.swing.JButton();
         addAsset1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Fantasy RolePlay Warhammer");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         new_player.setText("Nowy gracz");
         new_player.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +134,25 @@ public class PlayerSheet extends javax.swing.JFrame {
     private void new_playerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_playerActionPerformed
         new PlayerCreation(this).setVisible(true);
     }//GEN-LAST:event_new_playerActionPerformed
-
+    boolean clearBase()
+    {
+        Object[] options = {"Spoko", "Lepiej nie"};
+        int optionPane = JOptionPane.showOptionDialog(this, "Usunąć dane programu?", "Usuwanie danych zapisanych w programie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);               
+        if(optionPane != 0)
+        {
+            System.out.println("Nie usunięto bazy");
+            return false;
+        }    
+        players = new ArrayList<Player>();
+        professions = new ArrayList<Profession>();
+        races = new Race();
+        skills = new ArrayList<Skill>();
+        talents = new ArrayList<Talent>();
+        equipment = new ArrayList<Equipment>();
+        System.out.println();
+        return true;
+    }
+    
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.setCurrentDirectory(new java.io.File("."));
@@ -147,23 +172,31 @@ public class PlayerSheet extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_saveActionPerformed
-
     private void loadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadActionPerformed
-        JFileChooser fc = new JFileChooser();
-        fc.setCurrentDirectory(new java.io.File("."));
-        fc.setDialogTitle("Otwórz");
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setApproveButtonText("Otwórz");
-        fc.setApproveButtonToolTipText("Otwórz z pliku");
-        fc.setAcceptAllFileFilterUsed(false);  
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("WarhammerPlayerSheet database", "wpsdb");
-        fc.addChoosableFileFilter(filter);
-        if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+        Object[] options = {"Nowa baza", "Istniejąca"};
+        if(JOptionPane.showOptionDialog(this, "Co chcesz zrobić?", "Wyczyścić bazę", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
         {
-            try {
-                load(fc.getSelectedFile().getAbsolutePath());
-            } catch (IOException ex) {
-                Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, ex);
+            clearBase();
+            printDatabase();
+        }
+        else
+        {
+            JFileChooser fc = new JFileChooser();
+            fc.setCurrentDirectory(new java.io.File("."));
+            fc.setDialogTitle("Otwórz");
+            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fc.setApproveButtonText("Otwórz");
+            fc.setApproveButtonToolTipText("Otwórz z pliku");
+            fc.setAcceptAllFileFilterUsed(false);  
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("WarhammerPlayerSheet database", "wpsdb");
+            fc.addChoosableFileFilter(filter);
+            if(fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+            {
+                try {
+                    load(fc.getSelectedFile().getAbsolutePath());
+                } catch (IOException ex) {
+                    Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }//GEN-LAST:event_loadActionPerformed
@@ -175,6 +208,32 @@ public class PlayerSheet extends javax.swing.JFrame {
     private void addAsset1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAsset1ActionPerformed
         new BrowseAssets(professions, skills, talents, players).setVisible(true);
     }//GEN-LAST:event_addAsset1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        Object[] options = {"Zamykamy", "OH NEEIN!"};
+        if(JOptionPane.showOptionDialog(this, "Zamknąć?", "Zamykanie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
+        {            
+            System.out.println("Zapisywanie danych");     
+            try {
+                save();
+            } catch (IOException ex) {
+                Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Zabijanie");     
+            System.exit(0);
+        }
+        else
+        {
+            System.out.println("Okazano litość");     
+        }
+                
+           
+    }//GEN-LAST:event_formWindowClosing
+    boolean save() throws IOException
+    {
+        //System.out.println(System.getenv("localappdata") + "\\WarhammerPlayerSheet\\defaultDatabase");
+        return save(System.getenv("localappdata") + "\\WarhammerPlayerSheet\\defaultDatabase");
+    }    
     boolean save(String filePath) throws FileNotFoundException, IOException
     {
         Object[] temptab = new Object[6];        
@@ -183,9 +242,11 @@ public class PlayerSheet extends javax.swing.JFrame {
         temptab[2] = races;
         temptab[3] = skills;
         temptab[4] = talents;
-        temptab[5] = equipment;
-        try{
-            File filex = new File(filePath);            
+        temptab[5] = equipment;        
+        try{            
+            File filex = new File(filePath);  
+            filex.getParentFile().mkdirs();
+            filePath=filex.getAbsolutePath();
             if(filex.exists())
             {    
                 Object[] options = {"Poproszę", "Um, nope"};
@@ -201,7 +262,7 @@ public class PlayerSheet extends javax.swing.JFrame {
             {
                 filePath+=extension;
             }                
-            FileOutputStream file = new FileOutputStream(filePath);
+            FileOutputStream file = new FileOutputStream(filePath);            
             ObjectOutputStream temp = new ObjectOutputStream(file);            
             temp.writeObject(temptab);
             temp.close();
@@ -209,24 +270,33 @@ public class PlayerSheet extends javax.swing.JFrame {
             System.out.println("Zapisano w "+filePath);
         }catch(Exception e)
         {
+            Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, e);
             return false;
         }
         return true;
+    }boolean load() throws IOException
+    {
+        //System.out.println(System.getenv("localappdata") + "\\WarhammerPlayerSheet\\defaultDatabase");
+        return load(System.getenv("localappdata") + "\\WarhammerPlayerSheet\\defaultDatabase");
     }
     boolean load(String filePath) throws FileNotFoundException, IOException
-    {        
+    {      
+        if(!filePath.endsWith(".wpsdb"))
+        {
+            filePath+=".wpsdb";
+        }
         Object[] temptab = new Object[6];
         try{             
             FileInputStream file = new FileInputStream(filePath);
             ObjectInputStream temp = new ObjectInputStream(file);
             temptab = (Object[]) temp.readObject();            
             temp.close();            
-            players = (ArrayList<Player>)temptab[0];
-            professions= (ArrayList<Profession>)temptab[1];
-            races= (Race)temptab[2];
-            skills= (ArrayList<Skill>)temptab[3];
-            talents= (ArrayList<Talent>)temptab[4];
-            equipment= (ArrayList<Equipment>)temptab[5];
+            try{players = (ArrayList<Player>)temptab[0]; }catch(Exception e){}
+            try{professions= (ArrayList<Profession>)temptab[1];}catch(Exception e){}
+            try{races= (Race)temptab[2];}catch(Exception e){}
+            try{skills= (ArrayList<Skill>)temptab[3];}catch(Exception e){}
+            try{talents= (ArrayList<Talent>)temptab[4];}catch(Exception e){}
+            try{equipment= (ArrayList<Equipment>)temptab[5];}catch(Exception e){}
             
         }catch(FileNotFoundException e)
         {   
@@ -239,12 +309,16 @@ public class PlayerSheet extends javax.swing.JFrame {
             return false;
         }
         System.out.println("Wczytywanie z "+filePath);
+        printDatabase();
+        return true;
+    }
+    void printDatabase()
+    {
         System.out.println("Graczy: "+players.size());
         System.out.println("Profesji: "+professions.size());
         System.out.println("Umiejętności: "+skills.size());
         System.out.println("Zdolności: "+talents.size());
         System.out.println("Ekwipunek: "+equipment.size());
-        return true;
     }
     /**
      * @param args the command line arguments
@@ -276,7 +350,11 @@ public class PlayerSheet extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PlayerSheet().setVisible(true);  
+                try {  
+                    new PlayerSheet().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(PlayerSheet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

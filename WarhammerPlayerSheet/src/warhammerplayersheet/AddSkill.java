@@ -21,7 +21,7 @@ public class AddSkill extends javax.swing.JFrame {
     /**
      * Creates new form AddSkill
      */
-    ArrayList skills;
+    ArrayList<Skill> skills;
     public AddSkill(ArrayList skills) {
         initComponents();
         this.skills=skills;
@@ -91,9 +91,9 @@ public class AddSkill extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -118,6 +118,17 @@ public class AddSkill extends javax.swing.JFrame {
             tstat=jComboBox1.getSelectedItem().toString().toUpperCase();
             tdesc=jTextArea1.getText();  
             tadvanced = jCheckBox1.isSelected() ? "Zaawansowana":"Podstawowa";
+                        
+            for(Skill sk : skills)
+            {
+                if(sk.toString().equals(tname))
+                {
+                    System.out.println("GÓWNO! Już taki jest!");
+                    JOptionPane.showMessageDialog(this, "Umiejętność o takiej nazwie już istnieje", "Błąd dodawania umiejętności", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+            }
+            
             skills.add(new Skill(tname, tstat, tdesc, jCheckBox1.isSelected()));
             message = 
                     String.format("%-6s %s %n","Nazwa:", tname) + 

@@ -82,7 +82,7 @@ public class PlayerCreation extends javax.swing.JFrame {
         setTitle("Tworzenie bohatera");
         setResizable(false);
 
-        characterName.setText("Name");
+        characterName.setToolTipText("Imię");
 
         jLabel1.setText("Rasa");
 

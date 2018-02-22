@@ -178,7 +178,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="characterName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name"/>
+        <Property name="toolTipText" type="java.lang.String" value="Imi&#x119;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="raceList">

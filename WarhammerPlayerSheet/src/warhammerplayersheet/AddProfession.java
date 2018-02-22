@@ -6,6 +6,9 @@
 package warhammerplayersheet;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -16,14 +19,19 @@ public class AddProfession extends javax.swing.JFrame {
     /**
      * Creates new form AddProfession
      */
-    ArrayList professions;
-    ArrayList skills, talents, equipment;
+    ArrayList professions, skills, talents, equipment;
+    ArrayList<Skill> addedSkills = new ArrayList<>();
+    ArrayList<Talent> addedTalents = new ArrayList<>();
     public AddProfession(ArrayList professions, ArrayList skills, ArrayList talents, ArrayList equipment) {
         initComponents();
         this.professions=professions;
         this.skills=skills;
         this.talents=talents;
         this.equipment=equipment;
+        
+        
+        //jList1.setModel(skills);
+        
     }
 
     /**
