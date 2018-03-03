@@ -64,12 +64,7 @@ public class Stats implements Serializable{
     void setWW(int val)
     {
         stats[0]=val;
-    }
-    String getWWdesc()
-    {
-        return "Walka wręcz";
-    }
-    
+    }  
     int getUS()
     {
         return stats[1];
@@ -77,10 +72,6 @@ public class Stats implements Serializable{
     void setUS(int val)
     {
         stats[1]=val;
-    }
-    String getUSdesc()
-    {
-        return "Umiejętności strzeleckie";
     }
     
     int getK()
@@ -91,10 +82,6 @@ public class Stats implements Serializable{
     {
         stats[2]=val;
     }
-    String getKdesc()
-    {
-        return "Krzepa";
-    }
     
     int getODP()
     {
@@ -103,10 +90,6 @@ public class Stats implements Serializable{
     void setODP(int val)
     {
         stats[3]=val;
-    }
-    String getODPdesc()
-    {
-        return "Odporność";
     }
     
     int getZR()
@@ -117,10 +100,6 @@ public class Stats implements Serializable{
     {
         stats[4]=val;
     }
-    String getZRdesc()
-    {
-        return "Zręczność";
-    }
     
     int getINT()
     {
@@ -129,10 +108,6 @@ public class Stats implements Serializable{
     void setINT(int val)
     {
         stats[5]=val;
-    }
-    String getINTdesc()
-    {
-        return "Inteligencja";
     }
     
     int getSW()
@@ -143,10 +118,6 @@ public class Stats implements Serializable{
     {
         stats[6]=val;
     }
-    String getSWdesc()
-    {
-        return "Siła woli";
-    }
     
     int getOGD()
     {
@@ -155,10 +126,6 @@ public class Stats implements Serializable{
     void setOGD(int val)
     {
         stats[7]=val;
-    }
-    String getOGDdesc()
-    {
-        return "Ogłada";
     }
     
     int getA()
@@ -169,11 +136,7 @@ public class Stats implements Serializable{
     {
         stats[8]=val;
     }
-    String getAdesc()
-    {
-        return "Ataki";
-    }
-        
+       
     int getZYW()
     {
         return stats[9];
@@ -181,10 +144,6 @@ public class Stats implements Serializable{
     void setZYW(int val)
     {
         stats[9]=val;
-    }
-    String getZYWdesc()
-    {
-        return "Żywotność";
     }
     
     int getS()
@@ -195,10 +154,6 @@ public class Stats implements Serializable{
     {
         stats[10]=val;
     }
-    String getSdesc()
-    {
-        return "Szybkość";
-    }
     
     int getWT()
     {
@@ -207,10 +162,6 @@ public class Stats implements Serializable{
     void setWT(int val)
     {
         stats[11]=val;
-    }
-    String getWTdesc()
-    {
-        return "Wytrzymałość";
     }
     
     int getSZ()
@@ -221,10 +172,6 @@ public class Stats implements Serializable{
     {
         stats[12]=val;
     }
-    String getSZdesc()
-    {
-        return "Szybkość";
-    }
     
     int getMAG()
     {
@@ -234,11 +181,7 @@ public class Stats implements Serializable{
     {
         stats[13]=val;
     }
-    String getMAGdesc()
-    {
-        return "Magia";
-    }
-    
+        
     int getPO()
     {
         return stats[14];
@@ -246,10 +189,6 @@ public class Stats implements Serializable{
     void setPO(int val)
     {
         stats[14]=val;
-    }
-    String getPOdesc()
-    {
-        return "Punkty obłędu";
     }
     
     int getPP()
@@ -259,11 +198,7 @@ public class Stats implements Serializable{
     void setPP(int val)
     {
         stats[15]=val;
-    }
-    String getPPdesc()
-    {
-        return "Punkty przeznaczenia";
-    }    
+    }       
 }
     
 

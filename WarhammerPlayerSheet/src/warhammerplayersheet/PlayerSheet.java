@@ -320,6 +320,11 @@ public class PlayerSheet extends javax.swing.JFrame {
         System.out.println("Zdolności: "+talents.size());
         System.out.println("Ekwipunek: "+equipment.size());
     }
+    public static boolean yesno()
+    {
+        Object[] options = {"Hai", "Īe"};
+        return JOptionPane.showOptionDialog(null, "Usunąć?", "Usuwanie elementu", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0;
+    }
     /**
      * @param args the command line arguments
      */

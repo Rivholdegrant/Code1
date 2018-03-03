@@ -5,6 +5,7 @@
  */
 package warhammerplayersheet;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -106,9 +107,13 @@ public class AddSkill extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextField1.setBackground(null);
+        jTextArea1.setBackground(null);
         if(jTextField1.getText().isEmpty() || jTextArea1.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola", "Błąd", JOptionPane.ERROR_MESSAGE);
+            if(jTextField1.getText().equals("")){jTextField1.setBackground(Color.red);}
+            if(jTextArea1.getText().equals("")){jTextArea1.setBackground(Color.red);}
         }
         else
         {
@@ -124,7 +129,7 @@ public class AddSkill extends javax.swing.JFrame {
                 if(sk.toString().equals(tname))
                 {
                     System.out.println("GÓWNO! Już taki jest!");
-                    JOptionPane.showMessageDialog(this, "Umiejętność o takiej nazwie już istnieje", "Błąd dodawania umiejętności", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Umiejętność o takiej nazwie już istnieje", "Błąd dodawania umiejętności", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
@@ -134,8 +139,7 @@ public class AddSkill extends javax.swing.JFrame {
                     String.format("%-6s %s %n","Nazwa:", tname) + 
                     String.format("%-6s %s %n","Typ:", tadvanced) +
                     String.format("%-6s %s %n","Cecha:", tstat) +
-                    String.format("%-6s %s","Opis:", tdesc);
-            //String.format("%6s", "Nazwa");
+                    String.format("%-6s %s","Opis:", tdesc);            
             JTextPane jt = new JTextPane();
             jt.setText(message);            
             jt.setPreferredSize(new Dimension(140, 220));

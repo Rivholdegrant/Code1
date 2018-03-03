@@ -53,7 +53,7 @@ public class BrowseSkills extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Dodawanie umiejętności");
+        setTitle("Przeglądanie umiejętności");
         setResizable(false);
 
         jComboBox2.setToolTipText("Umiejętność");
@@ -134,6 +134,9 @@ public class BrowseSkills extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if(!PlayerSheet.yesno()){return;}
+        
         skills.remove(jComboBox2.getSelectedItem());   
         this.dispose();
         new BrowseSkills(skills).setVisible(true);

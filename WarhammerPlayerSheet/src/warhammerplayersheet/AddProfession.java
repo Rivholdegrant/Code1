@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.ListModel;
 
 /**
@@ -20,7 +22,8 @@ public class AddProfession extends javax.swing.JFrame {
     /**
      * Creates new form AddProfession
      */
-    ArrayList professions, skills, talents, equipment;
+    ArrayList skills, talents, equipment;
+    ArrayList<Profession> professions;
     
     
     Equipment[] addedEq;
@@ -34,6 +37,14 @@ public class AddProfession extends javax.swing.JFrame {
     Talent[] addedTalents;
     DefaultListModel tempTalents = new DefaultListModel<Talent>();
     DefaultListModel tempAddedTalents = new DefaultListModel<Talent>();
+    
+    Profession[] addedEntries;    
+    DefaultListModel tempAddedEntries = new DefaultListModel<Profession>();
+    
+    Profession[] addedExits;    
+    DefaultListModel tempAddedExits = new DefaultListModel<Profession>();
+    
+    
     
     public AddProfession(ArrayList professions, ArrayList skills, ArrayList talents, ArrayList equipment) {
         initComponents();
@@ -50,6 +61,9 @@ public class AddProfession extends javax.swing.JFrame {
         jList3.setModel(tempTalents);
         jList4.setModel(tempAddedTalents); 
         
+        jList5.setModel(tempAddedEntries);
+        jList6.setModel(tempAddedExits);
+        
         //jList1.repaint();
         //System.out.println(jList1.getModel().getSize());
     }
@@ -58,6 +72,13 @@ public class AddProfession extends javax.swing.JFrame {
         for(int i=0; i<array.size() ; i++)
         {
             model.addElement(array.get(i));
+        }
+    }
+    void arrayToModel(DefaultListModel model, Object[] array)
+    {
+        for(int i=0; i<array.length ; i++)
+        {
+            model.addElement(array[i]);
         }
     }
     
@@ -73,22 +94,22 @@ public class AddProfession extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
+        wwfield = new javax.swing.JTextField();
+        usfield = new javax.swing.JTextField();
+        kfield = new javax.swing.JTextField();
+        odpfield = new javax.swing.JTextField();
+        ogdfield = new javax.swing.JTextField();
+        zrfield = new javax.swing.JTextField();
+        intfield = new javax.swing.JTextField();
+        swfield = new javax.swing.JTextField();
+        pofield = new javax.swing.JTextField();
+        ppfield = new javax.swing.JTextField();
+        szfield = new javax.swing.JTextField();
+        magfield = new javax.swing.JTextField();
+        afield = new javax.swing.JTextField();
+        zywfield = new javax.swing.JTextField();
+        sfield = new javax.swing.JTextField();
+        wtfield = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jButton1 = new javax.swing.JButton();
@@ -104,49 +125,67 @@ public class AddProfession extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList4 = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jTextField18 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField19 = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList<>();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jList6 = new javax.swing.JList<>();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dodawanie profesji");
         setResizable(false);
 
         jTextField1.setToolTipText("Nazwa profesji");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField1FocusLost(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setToolTipText("Opis profesji");
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField2.setToolTipText("Walka Wręcz");
+        wwfield.setToolTipText("Walka Wręcz");
 
-        jTextField3.setToolTipText("Umiejętności Strzeleckie");
+        usfield.setToolTipText("Umiejętności Strzeleckie");
 
-        jTextField4.setToolTipText("Krzepa");
+        kfield.setToolTipText("Krzepa");
 
-        jTextField5.setToolTipText("Odporność");
+        odpfield.setToolTipText("Odporność");
 
-        jTextField6.setToolTipText("Ogłada");
+        ogdfield.setToolTipText("Ogłada");
 
-        jTextField7.setToolTipText("Zręczność");
+        zrfield.setToolTipText("Zręczność");
 
-        jTextField8.setToolTipText("Inteligencja");
+        intfield.setToolTipText("Inteligencja");
 
-        jTextField9.setToolTipText("Siłą woli");
+        swfield.setToolTipText("Siłą woli");
 
-        jTextField10.setToolTipText("Punkty Obłędu");
+        pofield.setToolTipText("Punkty Obłędu");
 
-        jTextField11.setToolTipText("Punkty Przeznaczenia");
+        ppfield.setToolTipText("Punkty Przeznaczenia");
 
-        jTextField12.setToolTipText("Szybkość");
+        szfield.setToolTipText("Szybkość");
 
-        jTextField13.setToolTipText("Magia");
+        magfield.setToolTipText("Magia");
 
-        jTextField14.setToolTipText("Ataki");
+        afield.setToolTipText("Ataki");
 
-        jTextField15.setToolTipText("Żywotność");
+        zywfield.setToolTipText("Żywotność");
 
-        jTextField16.setToolTipText("Siła");
+        sfield.setToolTipText("Siła");
 
-        jTextField17.setToolTipText("Wytrzymałość");
+        wtfield.setToolTipText("Wytrzymałość");
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setToolTipText("");
@@ -205,76 +244,121 @@ public class AddProfession extends javax.swing.JFrame {
         jList4.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane5.setViewportView(jList4);
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Profesje wyjścia");
+        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jCheckBox1.setText("Profesja zaawansowana");
+
+        jTextField18.setToolTipText("Profesja wejścia");
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Profesje wejścia");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jTextField19.setToolTipText("Profesja wyjścia");
+
+        jScrollPane6.setViewportView(jList5);
+
+        jScrollPane7.setViewportView(jList6);
+
+        jButton7.setText("+");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("+");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jTextField1)
+                    .addComponent(jCheckBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(afield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(zywfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(wtfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(szfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(magfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pofield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ppfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(wwfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(usfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(kfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(odpfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(zrfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(intfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(swfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ogdfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField1))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jTextField18)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton7)))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                    .addComponent(jButton4)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextField19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton8))
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,29 +368,7 @@ public class AddProfession extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -320,14 +382,52 @@ public class AddProfession extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                                .addComponent(jButton5))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(wwfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(usfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(kfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(odpfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zrfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(intfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(swfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ogdfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(afield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(zywfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(wtfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(szfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(magfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pofield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ppfield, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7)
+                    .addComponent(jButton8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addContainerGap())
         );
@@ -345,33 +445,31 @@ public class AddProfession extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int ww  = Integer.parseInt(jTextField2.getText().equals("")?"0":jTextField2.getText());
-        int us  = Integer.parseInt(jTextField3.getText().equals("")?"0":jTextField3.getText());
-        int k   = Integer.parseInt(jTextField4.getText().equals("")?"0":jTextField4.getText());
-        int odp = Integer.parseInt(jTextField5.getText().equals("")?"0":jTextField5.getText());
-        int zr  = Integer.parseInt(jTextField7.getText().equals("")?"0":jTextField7.getText());
-        int in  = Integer.parseInt(jTextField8.getText().equals("")?"0":jTextField8.getText());
-        int sw  = Integer.parseInt(jTextField9.getText().equals("")?"0":jTextField9.getText());
-        int ogd = Integer.parseInt(jTextField6.getText().equals("")?"0":jTextField6.getText());
-        int a   = Integer.parseInt(jTextField14.getText().equals("")?"0":jTextField14.getText());
-        int zyw = Integer.parseInt(jTextField15.getText().equals("")?"0":jTextField15.getText());
-        int s   = Integer.parseInt(jTextField16.getText().equals("")?"0":jTextField16.getText());
-        int wt  = Integer.parseInt(jTextField17.getText().equals("")?"0":jTextField16.getText());
-        int sz  = Integer.parseInt(jTextField12.getText().equals("")?"0":jTextField12.getText());
-        int mag = Integer.parseInt(jTextField13.getText().equals("")?"0":jTextField13.getText());
-        int po  = Integer.parseInt(jTextField10.getText().equals("")?"0":jTextField10.getText());
-        int pp  = Integer.parseInt(jTextField11.getText().equals("")?"0":jTextField11.getText());
+        int ww  = Integer.parseInt(wwfield.getText().equals("")?"0":wwfield.getText());
+        int us  = Integer.parseInt(usfield.getText().equals("")?"0":usfield.getText());
+        int k   = Integer.parseInt(kfield.getText().equals("")?"0":kfield.getText());
+        int odp = Integer.parseInt(odpfield.getText().equals("")?"0":odpfield.getText());
+        int zr  = Integer.parseInt(zrfield.getText().equals("")?"0":zrfield.getText());
+        int in  = Integer.parseInt(intfield.getText().equals("")?"0":intfield.getText());
+        int sw  = Integer.parseInt(swfield.getText().equals("")?"0":swfield.getText());
+        int ogd = Integer.parseInt(ogdfield.getText().equals("")?"0":ogdfield.getText());
+        int a   = Integer.parseInt(afield.getText().equals("")?"0":afield.getText());
+        int zyw = Integer.parseInt(zywfield.getText().equals("")?"0":zywfield.getText());
+        int s   = Integer.parseInt(sfield.getText().equals("")?"0":sfield.getText());
+        int wt  = Integer.parseInt(wtfield.getText().equals("")?"0":sfield.getText());
+        int sz  = Integer.parseInt(szfield.getText().equals("")?"0":szfield.getText());
+        int mag = Integer.parseInt(magfield.getText().equals("")?"0":magfield.getText());
+        int po  = Integer.parseInt(pofield.getText().equals("")?"0":pofield.getText());
+        int pp  = Integer.parseInt(ppfield.getText().equals("")?"0":ppfield.getText());
         
         Stats tempstats = new Stats(ww,us,k,odp,zr,in,sw,ogd,a,zyw,s,wt,sz,mag,po,pp);
-        
-        System.out.println(tempAddedSkills.get(0).toString());
-        
+                
         saveLists();            
                 
         professions.add(new Profession(jTextField1.getText(), jTextArea1.getText(), tempstats, 
                 addedSkills, 
                 addedTalents, 
-                addedEq, null, null ));
+                addedEq, null, null, jCheckBox1.isEnabled()));
         
         clearFields();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -406,6 +504,149 @@ public class AddProfession extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         listToList(jList4, jList3, tempTalents, tempAddedTalents);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        fieldToList(tempAddedEntries, jTextField18);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        fieldToList(tempAddedExits, jTextField19);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        for(int i=0 ; i<professions.size() ; i++)
+        {
+            enableAll(true);
+            System.out.println(professions.get(i).getName());
+            if(jTextField1.getText().equals(professions.get(i).getName()))
+            {
+                System.out.println("Taka profesja istnieje");
+                
+                Object[] options = {"Oczywiście", "Naah"};
+                if(JOptionPane.showOptionDialog(null, "Taka profesja istnieje. Edytować?", "Profesja istnieje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
+                {
+                    loadProfession(jTextField1.getText());
+                }
+                else
+                {
+                    enableAll(false);
+                }
+                return;
+            }
+        }        
+    }//GEN-LAST:event_jTextField1FocusLost
+    void enableAll(boolean bool)
+    {
+        jScrollPane1.setEnabled(bool);
+        wwfield.setEnabled(bool);
+        usfield.setEnabled(bool);
+        kfield.setEnabled(bool);
+        odpfield.setEnabled(bool);
+        ogdfield.setEnabled(bool);
+        zrfield.setEnabled(bool);
+        intfield.setEnabled(bool);
+        swfield.setEnabled(bool);
+        pofield.setEnabled(bool);
+        ppfield.setEnabled(bool);
+        szfield.setEnabled(bool);
+        magfield.setEnabled(bool);
+        afield.setEnabled(bool);
+        zywfield.setEnabled(bool);
+        sfield.setEnabled(bool);
+        wtfield.setEnabled(bool);
+        jTextField18.setEnabled(bool);
+        jTextField19.setEnabled(bool);
+        jCheckBox1.setEnabled(bool);
+        jScrollPane2.setEnabled(bool);
+        jScrollPane3.setEnabled(bool);
+        jScrollPane4.setEnabled(bool);
+        jScrollPane5.setEnabled(bool);
+        jScrollPane6.setEnabled(bool);
+        jScrollPane7.setEnabled(bool);
+        jButton1.setEnabled(bool);
+        jButton2.setEnabled(bool);
+        jButton3.setEnabled(bool);
+        jButton4.setEnabled(bool);
+        jButton5.setEnabled(bool);
+        jButton7.setEnabled(bool);
+        jButton8.setEnabled(bool);  
+    }
+    void loadProfession(String name)
+    {
+        for(int i=0 ; i<professions.size() ; i++)
+        {
+            if(name.equals(professions.get(i).getName()))
+            {
+                Profession temp = professions.get(i);
+                
+                jTextArea1.setText(temp.getDescription());
+                jCheckBox1.setSelected(temp.isAdvanced());
+                wwfield.setText  (temp.getStats().getWW()==0?"":""+temp.getStats().getWW());
+                usfield.setText  (temp.getStats().getUS()==0?"":""+temp.getStats().getUS());
+                kfield.setText   (temp.getStats().getK()==0?"":""+temp.getStats().getK());
+                odpfield.setText (temp.getStats().getODP()==0?"":""+temp.getStats().getODP());
+                ogdfield.setText (temp.getStats().getOGD()==0?"":""+temp.getStats().getOGD());
+                zrfield.setText  (temp.getStats().getZR()==0?"":""+temp.getStats().getZR());
+                intfield.setText (temp.getStats().getINT()==0?"":""+temp.getStats().getINT());
+                swfield.setText  (temp.getStats().getSW()==0?"":""+temp.getStats().getSW());
+                pofield.setText  (temp.getStats().getPO()==0?"":""+temp.getStats().getPO());
+                ppfield.setText  (temp.getStats().getPP()==0?"":""+temp.getStats().getPP());
+                szfield.setText  (temp.getStats().getSZ()==0?"":""+temp.getStats().getSZ());
+                magfield.setText (temp.getStats().getMAG()==0?"":""+temp.getStats().getMAG());
+                afield.setText   (temp.getStats().getA()==0?"":""+temp.getStats().getA());
+                zywfield.setText (temp.getStats().getZYW()==0?"":""+temp.getStats().getZYW());
+                sfield.setText   (temp.getStats().getS()==0?"":""+temp.getStats().getS());
+                wtfield.setText  (temp.getStats().getWT()==0?"":""+temp.getStats().getWT());
+                
+                                
+                arrayToModel(tempAddedSkills, temp.getSkills());
+                arrayToModel(tempAddedTalents, temp.getTalents());
+                arrayToModel(tempAddedEntries, temp.getEntries());
+                arrayToModel(tempAddedExits, temp.getExits());
+                
+                for(i=0 ; i<tempAddedSkills.toArray().length ; i++)
+                {
+                    tempSkills.removeElement(tempAddedSkills.toArray()[i]);
+                }
+                for(i=0 ; i<tempAddedTalents.toArray().length ; i++)
+                {
+                    tempTalents.removeElement(tempAddedTalents.toArray()[i]);
+                }                
+                
+                return;
+            }            
+        }
+        JOptionPane.showMessageDialog(this, "Nie można wczytać", "Błąd", JOptionPane.ERROR_MESSAGE);
+    }
+    void fieldToList(DefaultListModel<Profession> targetList, JTextField text)
+    {   
+        for(int i=0 ; i<targetList.getSize() ; i++)
+        {            
+            if(targetList.getElementAt(i).getName().equals(text.getText()))
+            {
+                JOptionPane.showMessageDialog(this, "Taka profesja jest już dodana", "Błąd", JOptionPane.ERROR_MESSAGE);
+                text.setText("");
+                return;
+            }
+        }        
+        for(int i=0 ; i<professions.size() ; i++)
+        {
+            if(professions.get(i).getName().equals(text.getText()))
+            {
+                targetList.addElement(professions.get(i));
+                text.setText("");
+                return;
+            }            
+        }
+        Object[] options = {"Oui", "Non"};        
+        if(JOptionPane.showOptionDialog(null, "Brak profesji w bazie. Utworzyć?", "Nie znaleziono profesji", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
+        {
+            Profession tempProf = new Profession(text.getText());
+            professions.add(tempProf);
+            targetList.addElement(tempProf);
+        }
+        text.setText("");
+    }
     void listToList(JList<String> jl1, JList<String> jl2, DefaultListModel targetList, DefaultListModel initialList )
     {
         int index;
@@ -432,39 +673,50 @@ public class AddProfession extends javax.swing.JFrame {
      */    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField afield;
+    private javax.swing.JTextField intfield;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JList<String> jList4;
+    private javax.swing.JList<String> jList5;
+    private javax.swing.JList<String> jList6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField18;
+    private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField kfield;
+    private javax.swing.JTextField magfield;
+    private javax.swing.JTextField odpfield;
+    private javax.swing.JTextField ogdfield;
+    private javax.swing.JTextField pofield;
+    private javax.swing.JTextField ppfield;
+    private javax.swing.JTextField sfield;
+    private javax.swing.JTextField swfield;
+    private javax.swing.JTextField szfield;
+    private javax.swing.JTextField usfield;
+    private javax.swing.JTextField wtfield;
+    private javax.swing.JTextField wwfield;
+    private javax.swing.JTextField zrfield;
+    private javax.swing.JTextField zywfield;
     // End of variables declaration//GEN-END:variables
 }

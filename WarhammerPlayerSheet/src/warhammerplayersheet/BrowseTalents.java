@@ -294,6 +294,12 @@ public class BrowseTalents extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        Object[] options = {"Hai", "Īe"};
+//        if(JOptionPane.showOptionDialog(this, "Usunąć?", "Usuwanie elementu", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==1)
+//        {
+//            return;
+//        }   
+        if(!PlayerSheet.yesno()){return;}
         talents.remove(jComboBox2.getSelectedItem());   
         this.dispose();
         new BrowseTalents(talents).setVisible(true);             

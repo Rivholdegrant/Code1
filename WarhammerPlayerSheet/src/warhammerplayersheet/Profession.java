@@ -20,8 +20,9 @@ public class Profession implements Serializable{
     private Equipment[] equipment;
     private Profession[] entries;
     private Profession[] exits;
+    private boolean advanced;
     
-    public Profession(String name, String description, Stats stats, Skill[] skills, Talent[] talents, Equipment[] equipment, Profession[] entries, Profession[] exits)
+    public Profession(String name, String description, Stats stats, Skill[] skills, Talent[] talents, Equipment[] equipment, Profession[] entries, Profession[] exits, boolean advanced)
     {
         this.name        = name;     
         this.description = description;
@@ -31,6 +32,7 @@ public class Profession implements Serializable{
         this.equipment   = equipment;
         this.entries     = entries;
         this.exits       = exits;
+        this.advanced    = advanced;
     }
     public Profession(String name)
     {
@@ -65,6 +67,10 @@ public class Profession implements Serializable{
     {
         this.exits     = exits;
     }
+    void setAdvanced(boolean advanced)
+    {
+        this.advanced=advanced;
+    }
     //getters
     String getName()
     {
@@ -97,6 +103,10 @@ public class Profession implements Serializable{
     Profession[] getExits()
     {
         return exits;
+    }
+    boolean isAdvanced()
+    {
+        return advanced;
     }
     @Override
     public String toString()

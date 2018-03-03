@@ -5,6 +5,7 @@
  */
 package warhammerplayersheet;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -257,12 +258,31 @@ public class AddTalent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextField1.setBackground(null);
+        jTextArea1.setBackground(null); 
         if(jTextField1.getText().isEmpty() || jTextArea1.getText().isEmpty())
         {
-            JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola", "Błąd", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Wypełnij wymagane pola", "Błąd", JOptionPane.ERROR_MESSAGE);
+            if(jTextField1.getText().equals("")){jTextField1.setBackground(Color.red);}
+            if(jTextArea1.getText().equals("")){jTextArea1.setBackground(Color.red);}            
         }
         else
-        {
+        { 
+            String tname, tdesc, tstat, tadvanced, message;
+                       
+            tname=jTextField1.getText().toUpperCase();            
+            tdesc=jTextArea1.getText();           
+                        
+            for(Talent tl : talents)
+            {
+                if(tl.toString().equals(tname))
+                {
+                    System.out.println("GÓWNO! Już taki jest!");
+                    JOptionPane.showMessageDialog(this, "Umiejętność o takiej nazwie już istnieje", "Błąd dodawania umiejętności", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            
             int ww  = Integer.parseInt(jTextField2.getText().equals("")?"0":jTextField2.getText());
             int us  = Integer.parseInt(jTextField3.getText().equals("")?"0":jTextField3.getText());
             int k   = Integer.parseInt(jTextField4.getText().equals("")?"0":jTextField4.getText());
@@ -279,15 +299,55 @@ public class AddTalent extends javax.swing.JFrame {
             int mag = Integer.parseInt(jTextField13.getText().equals("")?"0":jTextField13.getText());
             int po  = Integer.parseInt(jTextField10.getText().equals("")?"0":jTextField10.getText());
             int pp  = Integer.parseInt(jTextField11.getText().equals("")?"0":jTextField11.getText());
-                    
-        Stats tempstats = new Stats(ww,us,k,odp,zr,in,sw,ogd,a,zyw,s,wt,sz,mag,po,pp);
-        
-        saveLists();
-        
-        talents.add(new Talent(jTextField1.getText(), jTextArea1.getText(),addedSkills, tempstats));
-        
-        clearFields();
-        
+
+            Stats tempstats = new Stats(ww,us,k,odp,zr,in,sw,ogd,a,zyw,s,wt,sz,mag,po,pp);
+
+            saveLists();
+
+            talents.add(new Talent(tname, tdesc, addedSkills, tempstats));
+
+            String tempSkills = "";
+            for(int i=0 ; i<addedSkills.length ; i++)
+            {
+                tempSkills+=addedSkills[i];
+                tempSkills+=addedSkills.length-1==i?". ":", ";
+            }
+            String tempStats = "";
+            tempStats+=ww!=0?"WW: +"+ww:"";
+            tempStats+=us!=0?"US: +"+us:"";
+            tempStats+=k!=0?"K: +"+k:"";
+            tempStats+=odp!=0?"ODP: +"+odp:"";
+            tempStats+=zr!=0?"ZR: +"+zr:"";
+            tempStats+=in!=0?"INT: +"+in:"";
+            tempStats+=sw!=0?"SW: +"+sw:"";
+            tempStats+=ogd!=0?"OGD: +"+ogd:"";
+            tempStats+=a!=0?"A: +"+a:"";
+            tempStats+=zyw!=0?"ŻYW: +"+zyw:"";
+            tempStats+=s!=0?"S: +"+s:"";
+            tempStats+=wt!=0?"WT: +"+wt:"";
+            tempStats+=sz!=0?"SZ: +"+sz:"";
+            tempStats+=mag!=0?"MAG: +"+mag:"";
+            tempStats+=po!=0?"PO: +"+po:"";
+            tempStats+=pp!=0?"PP: +"+pp:"";
+            
+
+            message = 
+                    String.format("%-6s %s %n","Nazwa:", tname) +                 
+                    String.format("%-6s %s %n","Opis:", tdesc) + 
+                    String.format("%-6s %s %n","Wpływa na:", tempSkills) +
+                    String.format("%-6s %s %n","Statystyki:", tempStats);  
+            JTextPane jt = new JTextPane();
+            jt.setText(message);            
+            jt.setPreferredSize(new Dimension(140, 220));
+            jt.setOpaque(true);
+            jt.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+            jt.setEditable(false);
+            jt.setBackground(null);
+            jt.setAutoscrolls(true);
+
+            JOptionPane.showMessageDialog(this, jt, "Dodano zdolność", JOptionPane.PLAIN_MESSAGE);
+
+            clearFields();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
