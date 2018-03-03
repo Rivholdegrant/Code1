@@ -291,22 +291,22 @@ public class PlayerSheet extends javax.swing.JFrame {
             ObjectInputStream temp = new ObjectInputStream(file);
             temptab = (Object[]) temp.readObject();            
             temp.close();            
-            try{players = (ArrayList<Player>)temptab[0]; }catch(Exception e){}
-            try{professions= (ArrayList<Profession>)temptab[1];}catch(Exception e){}
-            try{races= (Race)temptab[2];}catch(Exception e){}
-            try{skills= (ArrayList<Skill>)temptab[3];}catch(Exception e){}
-            try{talents= (ArrayList<Talent>)temptab[4];}catch(Exception e){}
-            try{equipment= (ArrayList<Equipment>)temptab[5];}catch(Exception e){}
+            players = (ArrayList<Player>)temptab[0]; 
+            professions= (ArrayList<Profession>)temptab[1];
+            races= (Race)temptab[2];
+            skills= (ArrayList<Skill>)temptab[3];
+            talents= (ArrayList<Talent>)temptab[4];
+            equipment= (ArrayList<Equipment>)temptab[5];
             
         }catch(FileNotFoundException e)
         {   
             System.out.println("Wczytywanie z "+filePath+" nie powiodło się. Nie znaleziono pliku.");     	
-            return false;
+            //return false;
         }
         catch(Exception e)
         {
             System.out.println(e.getMessage());
-            return false;
+            //return false;
         }
         System.out.println("Wczytywanie z "+filePath);
         printDatabase();

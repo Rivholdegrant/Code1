@@ -145,12 +145,10 @@ public class AddSkill extends javax.swing.JFrame {
             jt.setBackground(null);
             jt.setAutoscrolls(true);
             
-            
-            //jt.setFocusable(false);
             JOptionPane.showMessageDialog(this, jt, "Dodano umiejętność", JOptionPane.PLAIN_MESSAGE);
-            jTextField1.setText("");            
-            jTextArea1.setText("");                        
-            //this.dispose();
+            this.dispose();
+            new AddSkill(skills).setVisible(true);
+            
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

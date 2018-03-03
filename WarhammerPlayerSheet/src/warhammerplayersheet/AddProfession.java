@@ -396,8 +396,7 @@ public class AddProfession extends javax.swing.JFrame {
         for(int i=0; i<tempAddedEq.getSize() ; i++)
         {
             addedEq[i]=((Equipment)tempAddedEq.get(i));
-        } 
-        
+        }         
     }
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -419,8 +418,7 @@ public class AddProfession extends javax.swing.JFrame {
             System.out.println("Brakło skilli.");
             return;
         }
-        initialList.remove(index);
-        System.out.println(jl2.getModel().getSize());
+        initialList.remove(index);        
     }
     void modelToArray(DefaultListModel model, ArrayList array)
     {

@@ -6,6 +6,7 @@
 package warhammerplayersheet;
 
 import java.io.Serializable;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,4 +46,8 @@ class Skill implements Serializable{
     {
         return name;
     }   
+    void show()
+    {
+        
+    }
 }

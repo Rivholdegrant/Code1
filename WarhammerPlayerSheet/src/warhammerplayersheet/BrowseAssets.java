@@ -62,6 +62,11 @@ public class BrowseAssets extends javax.swing.JFrame {
         });
 
         browseTalent.setText("Zdolności");
+        browseTalent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseTalentActionPerformed(evt);
+            }
+        });
 
         browseTalent1.setText("Postacie");
 
@@ -108,6 +113,10 @@ public class BrowseAssets extends javax.swing.JFrame {
     private void browseSkillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseSkillActionPerformed
         new BrowseSkills(skills).setVisible(true);
     }//GEN-LAST:event_browseSkillActionPerformed
+
+    private void browseTalentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseTalentActionPerformed
+        new BrowseTalents(talents).setVisible(true);
+    }//GEN-LAST:event_browseTalentActionPerformed
 
     /**
      * @param args the command line arguments

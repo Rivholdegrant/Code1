@@ -62,6 +62,11 @@ public class AddAsset extends javax.swing.JFrame {
         });
 
         AddTalent.setText("Zdolność");
+        AddTalent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddTalentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,6 +108,10 @@ public class AddAsset extends javax.swing.JFrame {
     private void addSkillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSkillActionPerformed
         new AddSkill(skills).setVisible(true);
     }//GEN-LAST:event_addSkillActionPerformed
+
+    private void AddTalentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTalentActionPerformed
+        new AddTalent(talents, skills).setVisible(true);
+    }//GEN-LAST:event_AddTalentActionPerformed
 
     /**
      * @param args the command line arguments
