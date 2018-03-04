@@ -5,7 +5,11 @@
  */
 package warhammerplayersheet;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.Serializable;
+import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -39,5 +43,31 @@ class Talent implements Serializable{
     public String toString()
     {
         return name;
+    }
+    void show()
+    {
+        String tempSkills = "";
+            for(int i=0 ; i<impactsSkills.length ; i++)
+            {
+                tempSkills+=impactsSkills[i];
+                tempSkills+=impactsSkills.length-1==i?". ":", ";
+            }
+            
+            String message = 
+                    String.format("%-6s %s %n","Nazwa:", name) +                 
+                    String.format("%-6s %s %n","Opis:", description) + 
+                    String.format("%-6s %s %n","Wpływa na:", tempSkills) +
+                    String.format("%-6s %s %n","Statystyki:", impactsStats.show());  
+            JTextPane jt = new JTextPane();
+            jt.setText(message);            
+            jt.setPreferredSize(new Dimension(140, 220));
+            jt.setOpaque(true);
+            jt.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+            jt.setEditable(false);
+            jt.setBackground(null);
+            jt.setAutoscrolls(true);
+
+            JOptionPane.showMessageDialog(null, jt, "Zdolność", JOptionPane.PLAIN_MESSAGE);
+
     }
 }

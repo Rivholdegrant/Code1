@@ -5,7 +5,11 @@
  */
 package warhammerplayersheet;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.Serializable;
+import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -107,6 +111,43 @@ public class Profession implements Serializable{
     boolean isAdvanced()
     {
         return advanced;
+    }
+    String advanced()
+    {
+        return advanced?"Zaawansowana":"Podstawowa";
+    }
+    String listToString(Object[] list)
+    {
+        String temp = "";
+        for(int i=0 ; i<list.length ; i++)
+        {
+            temp+=list[i].toString();            
+            temp+=i < list.length-1?", ":" ";
+        }
+        return temp;
+    }
+    void show()
+    {
+        String message = 
+                String.format("%-6s %s %n","Nazwa:", name) + 
+                String.format("%-6s %s %n","Typ:", advanced) +
+                String.format("%-6s %s %n","Opis:", description) +
+                String.format("%-6s %n %s %n","Rozwinięcia:", stats.show()) +
+                String.format("%-6s %n %s %n","Umiejętności:", listToString(skills)) +
+                String.format("%-6s %n %s %n","Zdolności:", listToString(talents)) +
+                String.format("%-6s %s %n","Profesje wejścia:", listToString(entries))+
+                String.format("%-6s %s %n","Profesje wyjścia:", listToString(exits));
+                ;            
+        JTextPane jt = new JTextPane();
+        jt.setText(message);            
+        jt.setPreferredSize(new Dimension(540, 320));
+        jt.setOpaque(true);
+        jt.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        jt.setEditable(false);
+        jt.setBackground(null);
+        jt.setAutoscrolls(true);
+            
+        JOptionPane.showMessageDialog(null, jt, "Profesja", JOptionPane.PLAIN_MESSAGE);
     }
     @Override
     public String toString()

@@ -5,13 +5,19 @@
  */
 package warhammerplayersheet;
 
+import com.sun.glass.events.KeyEvent;
+import java.awt.Color;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ListModel;
+import javax.swing.text.BadLocationException;
 
 /**
  *
@@ -147,6 +153,11 @@ public class AddProfession extends javax.swing.JFrame {
                 jTextField1FocusLost(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -155,37 +166,149 @@ public class AddProfession extends javax.swing.JFrame {
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
+        wwfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        wwfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         wwfield.setToolTipText("Walka Wręcz");
+        wwfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                wwfieldKeyReleased(evt);
+            }
+        });
 
+        usfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        usfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         usfield.setToolTipText("Umiejętności Strzeleckie");
+        usfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                usfieldKeyReleased(evt);
+            }
+        });
 
+        kfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        kfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         kfield.setToolTipText("Krzepa");
+        kfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                kfieldKeyReleased(evt);
+            }
+        });
 
+        odpfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        odpfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         odpfield.setToolTipText("Odporność");
+        odpfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                odpfieldKeyReleased(evt);
+            }
+        });
 
+        ogdfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        ogdfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ogdfield.setToolTipText("Ogłada");
+        ogdfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ogdfieldKeyReleased(evt);
+            }
+        });
 
+        zrfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        zrfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         zrfield.setToolTipText("Zręczność");
+        zrfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                zrfieldKeyReleased(evt);
+            }
+        });
 
+        intfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        intfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         intfield.setToolTipText("Inteligencja");
+        intfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                intfieldKeyReleased(evt);
+            }
+        });
 
+        swfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        swfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         swfield.setToolTipText("Siłą woli");
+        swfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                swfieldKeyReleased(evt);
+            }
+        });
 
+        pofield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        pofield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pofield.setToolTipText("Punkty Obłędu");
+        pofield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pofieldKeyReleased(evt);
+            }
+        });
 
+        ppfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        ppfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ppfield.setToolTipText("Punkty Przeznaczenia");
+        ppfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                ppfieldKeyReleased(evt);
+            }
+        });
 
+        szfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        szfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         szfield.setToolTipText("Szybkość");
+        szfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                szfieldKeyReleased(evt);
+            }
+        });
 
+        magfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        magfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         magfield.setToolTipText("Magia");
+        magfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                magfieldKeyReleased(evt);
+            }
+        });
 
+        afield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        afield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         afield.setToolTipText("Ataki");
+        afield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                afieldKeyReleased(evt);
+            }
+        });
 
+        zywfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        zywfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         zywfield.setToolTipText("Żywotność");
+        zywfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                zywfieldKeyReleased(evt);
+            }
+        });
 
+        sfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        sfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         sfield.setToolTipText("Siła");
+        sfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                sfieldKeyReleased(evt);
+            }
+        });
 
+        wtfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        wtfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         wtfield.setToolTipText("Wytrzymałość");
+        wtfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                wtfieldKeyReleased(evt);
+            }
+        });
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jList1.setToolTipText("");
@@ -414,7 +537,7 @@ public class AddProfession extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -445,33 +568,45 @@ public class AddProfession extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int ww  = Integer.parseInt(wwfield.getText().equals("")?"0":wwfield.getText());
-        int us  = Integer.parseInt(usfield.getText().equals("")?"0":usfield.getText());
-        int k   = Integer.parseInt(kfield.getText().equals("")?"0":kfield.getText());
-        int odp = Integer.parseInt(odpfield.getText().equals("")?"0":odpfield.getText());
-        int zr  = Integer.parseInt(zrfield.getText().equals("")?"0":zrfield.getText());
-        int in  = Integer.parseInt(intfield.getText().equals("")?"0":intfield.getText());
-        int sw  = Integer.parseInt(swfield.getText().equals("")?"0":swfield.getText());
-        int ogd = Integer.parseInt(ogdfield.getText().equals("")?"0":ogdfield.getText());
-        int a   = Integer.parseInt(afield.getText().equals("")?"0":afield.getText());
-        int zyw = Integer.parseInt(zywfield.getText().equals("")?"0":zywfield.getText());
-        int s   = Integer.parseInt(sfield.getText().equals("")?"0":sfield.getText());
-        int wt  = Integer.parseInt(wtfield.getText().equals("")?"0":sfield.getText());
-        int sz  = Integer.parseInt(szfield.getText().equals("")?"0":szfield.getText());
-        int mag = Integer.parseInt(magfield.getText().equals("")?"0":magfield.getText());
-        int po  = Integer.parseInt(pofield.getText().equals("")?"0":pofield.getText());
-        int pp  = Integer.parseInt(ppfield.getText().equals("")?"0":ppfield.getText());
-        
-        Stats tempstats = new Stats(ww,us,k,odp,zr,in,sw,ogd,a,zyw,s,wt,sz,mag,po,pp);
-                
-        saveLists();            
-                
-        professions.add(new Profession(jTextField1.getText(), jTextArea1.getText(), tempstats, 
-                addedSkills, 
-                addedTalents, 
-                addedEq, null, null, jCheckBox1.isEnabled()));
-        
-        clearFields();
+        jTextField1.setBackground(null);
+        jTextArea1.setBackground(null);
+        if(jTextField1.getText().isEmpty() || jTextArea1.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola", "Błąd", JOptionPane.ERROR_MESSAGE);
+            if(jTextField1.getText().equals("")){jTextField1.setBackground(Color.red);}
+            if(jTextArea1.getText().equals("")){jTextArea1.setBackground(Color.red);}
+        }
+        else
+        {        
+            int ww  = Integer.parseInt(wwfield.getText().equals("")?"0":wwfield.getText());
+            int us  = Integer.parseInt(usfield.getText().equals("")?"0":usfield.getText());
+            int k   = Integer.parseInt(kfield.getText().equals("")?"0":kfield.getText());
+            int odp = Integer.parseInt(odpfield.getText().equals("")?"0":odpfield.getText());
+            int zr  = Integer.parseInt(zrfield.getText().equals("")?"0":zrfield.getText());
+            int in  = Integer.parseInt(intfield.getText().equals("")?"0":intfield.getText());
+            int sw  = Integer.parseInt(swfield.getText().equals("")?"0":swfield.getText());
+            int ogd = Integer.parseInt(ogdfield.getText().equals("")?"0":ogdfield.getText());
+            int a   = Integer.parseInt(afield.getText().equals("")?"0":afield.getText());
+            int zyw = Integer.parseInt(zywfield.getText().equals("")?"0":zywfield.getText());
+            int s   = Integer.parseInt(sfield.getText().equals("")?"0":sfield.getText());
+            int wt  = Integer.parseInt(wtfield.getText().equals("")?"0":sfield.getText());
+            int sz  = Integer.parseInt(szfield.getText().equals("")?"0":szfield.getText());
+            int mag = Integer.parseInt(magfield.getText().equals("")?"0":magfield.getText());
+            int po  = Integer.parseInt(pofield.getText().equals("")?"0":pofield.getText());
+            int pp  = Integer.parseInt(ppfield.getText().equals("")?"0":ppfield.getText());
+
+            Stats tempstats = new Stats(ww,us,k,odp,zr,in,sw,ogd,a,zyw,s,wt,sz,mag,po,pp);
+
+            saveLists();            
+
+            professions.add(new Profession(jTextField1.getText(), jTextArea1.getText(), tempstats, 
+                    addedSkills, 
+                    addedTalents, 
+                    addedEq, addedEntries, addedExits, jCheckBox1.isEnabled()));
+
+            professions.get(professions.size()-1).show();            
+            clearFields();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
     void clearFields()
     {        
@@ -494,7 +629,22 @@ public class AddProfession extends javax.swing.JFrame {
         for(int i=0; i<tempAddedEq.getSize() ; i++)
         {
             addedEq[i]=((Equipment)tempAddedEq.get(i));
-        }         
+        }      
+        addedExits = new Profession[tempAddedExits.getSize()];
+        for(int i=0; i<tempAddedExits.getSize() ; i++)
+        {
+            addedExits[i]=((Profession)tempAddedExits.get(i));
+        }
+        addedEntries = new Profession[tempAddedEntries.getSize()];
+        for(int i=0; i<tempAddedEntries.getSize() ; i++)
+        {
+            addedEntries[i]=((Profession)tempAddedEntries.get(i));
+        }
+        addedExits = new Profession[tempAddedExits.getSize()];
+        for(int i=0; i<tempAddedExits.getSize() ; i++)
+        {
+            addedExits[i]=((Profession)tempAddedExits.get(i));
+        }
     }
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -514,16 +664,21 @@ public class AddProfession extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        if(jTextField1.getText().equals(""))
+        {
+            enableAll(false);
+            return;
+        }
+        
         for(int i=0 ; i<professions.size() ; i++)
         {
-            enableAll(true);
-            System.out.println(professions.get(i).getName());
+            enableAll(true);            
             if(jTextField1.getText().equals(professions.get(i).getName()))
             {
                 System.out.println("Taka profesja istnieje");
                 
                 Object[] options = {"Oczywiście", "Naah"};
-                if(JOptionPane.showOptionDialog(null, "Taka profesja istnieje. Edytować?", "Profesja istnieje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
+                if(JOptionPane.showOptionDialog(this, "Taka profesja istnieje. Edytować?", "Profesja istnieje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
                 {
                     loadProfession(jTextField1.getText());
                 }
@@ -535,9 +690,80 @@ public class AddProfession extends javax.swing.JFrame {
             }
         }        
     }//GEN-LAST:event_jTextField1FocusLost
+
+    private void wwfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wwfieldKeyReleased
+        PlayerSheet.checkField(wwfield, evt);
+    }//GEN-LAST:event_wwfieldKeyReleased
+
+    private void usfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usfieldKeyReleased
+        PlayerSheet.checkField(usfield, evt);
+    }//GEN-LAST:event_usfieldKeyReleased
+
+    private void kfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kfieldKeyReleased
+        PlayerSheet.checkField(kfield, evt);    }//GEN-LAST:event_kfieldKeyReleased
+
+    private void odpfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_odpfieldKeyReleased
+       PlayerSheet.checkField(odpfield, evt);
+    }//GEN-LAST:event_odpfieldKeyReleased
+
+    private void zrfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zrfieldKeyReleased
+        PlayerSheet.checkField(zrfield, evt);
+    }//GEN-LAST:event_zrfieldKeyReleased
+
+    private void intfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_intfieldKeyReleased
+        PlayerSheet.checkField(intfield, evt);
+    }//GEN-LAST:event_intfieldKeyReleased
+
+    private void swfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_swfieldKeyReleased
+        PlayerSheet.checkField(swfield, evt);
+    }//GEN-LAST:event_swfieldKeyReleased
+
+    private void ogdfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ogdfieldKeyReleased
+        PlayerSheet.checkField(ogdfield, evt);
+    }//GEN-LAST:event_ogdfieldKeyReleased
+
+    private void afieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_afieldKeyReleased
+        PlayerSheet.checkField(afield, evt);
+    }//GEN-LAST:event_afieldKeyReleased
+
+    private void zywfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zywfieldKeyReleased
+        PlayerSheet.checkField(zywfield, evt);
+    }//GEN-LAST:event_zywfieldKeyReleased
+
+    private void sfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sfieldKeyReleased
+        PlayerSheet.checkField(sfield, evt);
+    }//GEN-LAST:event_sfieldKeyReleased
+
+    private void wtfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wtfieldKeyReleased
+        PlayerSheet.checkField(wtfield, evt);
+    }//GEN-LAST:event_wtfieldKeyReleased
+
+    private void szfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_szfieldKeyReleased
+        PlayerSheet.checkField(szfield, evt);
+    }//GEN-LAST:event_szfieldKeyReleased
+
+    private void magfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_magfieldKeyReleased
+        PlayerSheet.checkField(magfield, evt);
+    }//GEN-LAST:event_magfieldKeyReleased
+
+    private void pofieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pofieldKeyReleased
+        PlayerSheet.checkField(pofield, evt);
+    }//GEN-LAST:event_pofieldKeyReleased
+
+    private void ppfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ppfieldKeyReleased
+        PlayerSheet.checkField(ppfield, evt);
+    }//GEN-LAST:event_ppfieldKeyReleased
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if(evt.getKeyChar()==KeyEvent.VK_ENTER)
+        {
+            jTextField1FocusLost(null);
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
+    
     void enableAll(boolean bool)
     {
-        jScrollPane1.setEnabled(bool);
+        jTextArea1.setEnabled(bool);
         wwfield.setEnabled(bool);
         usfield.setEnabled(bool);
         kfield.setEnabled(bool);
@@ -557,12 +783,12 @@ public class AddProfession extends javax.swing.JFrame {
         jTextField18.setEnabled(bool);
         jTextField19.setEnabled(bool);
         jCheckBox1.setEnabled(bool);
-        jScrollPane2.setEnabled(bool);
-        jScrollPane3.setEnabled(bool);
-        jScrollPane4.setEnabled(bool);
-        jScrollPane5.setEnabled(bool);
-        jScrollPane6.setEnabled(bool);
-        jScrollPane7.setEnabled(bool);
+        jList1.setEnabled(bool);
+        jList2.setEnabled(bool);
+        jList3.setEnabled(bool);
+        jList4.setEnabled(bool);
+        jList5.setEnabled(bool);
+        jList6.setEnabled(bool);        
         jButton1.setEnabled(bool);
         jButton2.setEnabled(bool);
         jButton3.setEnabled(bool);
@@ -668,6 +894,7 @@ public class AddProfession extends javax.swing.JFrame {
             array.add(model.get(i));
         }            
     }
+    
     /**
      * @param args the command line arguments
      */    

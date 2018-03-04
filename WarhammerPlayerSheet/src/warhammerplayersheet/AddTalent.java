@@ -83,9 +83,10 @@ public class AddTalent extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
+        jTextArea1.setRows(2);
         jTextArea1.setToolTipText("Opis");
         jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setMinimumSize(new java.awt.Dimension(50, 8));
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Zapisz");
@@ -95,50 +96,152 @@ public class AddTalent extends javax.swing.JFrame {
             }
         });
 
+        jTextField2.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField2.setToolTipText("Walka Wręcz");
-
-        jTextField3.setToolTipText("Umiejętności Strzeleckie");
-
-        jTextField4.setToolTipText("Krzepa");
-
-        jTextField5.setToolTipText("Odporność");
-
-        jTextField7.setToolTipText("Zręczność");
-
-        jTextField8.setToolTipText("Inteligencja");
-
-        jTextField9.setToolTipText("Siłą woli");
-
-        jTextField6.setToolTipText("Ogłada");
-
-        jTextField14.setToolTipText("Ataki");
-
-        jTextField15.setToolTipText("Żywotność");
-
-        jTextField16.setToolTipText("Siła");
-
-        jTextField17.setToolTipText("Wytrzymałość");
-
-        jTextField12.setToolTipText("Szybkość");
-
-        jTextField13.setToolTipText("Magia");
-
-        jTextField10.setToolTipText("Punkty Obłędu");
-
-        jTextField11.setToolTipText("Punkty Przeznaczenia");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
         });
+
+        jTextField3.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField3.setToolTipText("Umiejętności Strzeleckie");
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField3KeyReleased(evt);
+            }
+        });
+
+        jTextField4.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField4.setToolTipText("Krzepa");
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
+
+        jTextField5.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField5.setToolTipText("Odporność");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField5KeyReleased(evt);
+            }
+        });
+
+        jTextField7.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField7.setToolTipText("Zręczność");
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField7KeyReleased(evt);
+            }
+        });
+
+        jTextField8.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setToolTipText("Inteligencja");
+        jTextField8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField8KeyReleased(evt);
+            }
+        });
+
+        jTextField9.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField9.setToolTipText("Siłą woli");
+        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField9KeyReleased(evt);
+            }
+        });
+
+        jTextField6.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField6.setToolTipText("Ogłada");
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField6KeyReleased(evt);
+            }
+        });
+
+        jTextField14.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField14.setToolTipText("Ataki");
+        jTextField14.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField14KeyReleased(evt);
+            }
+        });
+
+        jTextField15.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField15.setToolTipText("Żywotność");
+        jTextField15.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField15KeyReleased(evt);
+            }
+        });
+
+        jTextField16.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField16.setToolTipText("Siła");
+        jTextField16.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField16KeyReleased(evt);
+            }
+        });
+
+        jTextField17.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField17.setToolTipText("Wytrzymałość");
+        jTextField17.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField17KeyReleased(evt);
+            }
+        });
+
+        jTextField12.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField12.setToolTipText("Szybkość");
+        jTextField12.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField12KeyReleased(evt);
+            }
+        });
+
+        jTextField13.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField13.setToolTipText("Magia");
+        jTextField13.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField13KeyReleased(evt);
+            }
+        });
+
+        jTextField10.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField10.setToolTipText("Punkty Obłędu");
+        jTextField10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField10KeyReleased(evt);
+            }
+        });
+
+        jTextField11.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField11.setToolTipText("Punkty Przeznaczenia");
+        jTextField11.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField11KeyReleased(evt);
+            }
+        });
+
         jScrollPane2.setViewportView(jList1);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(jList2);
 
         jButton2.setText("Dodaj");
@@ -206,7 +309,7 @@ public class AddTalent extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,48 +408,9 @@ public class AddTalent extends javax.swing.JFrame {
             saveLists();
 
             talents.add(new Talent(tname, tdesc, addedSkills, tempstats));
-
-            String tempSkills = "";
-            for(int i=0 ; i<addedSkills.length ; i++)
-            {
-                tempSkills+=addedSkills[i];
-                tempSkills+=addedSkills.length-1==i?". ":", ";
-            }
-            String tempStats = "";
-            tempStats+=ww!=0?"WW: +"+ww:"";
-            tempStats+=us!=0?"US: +"+us:"";
-            tempStats+=k!=0?"K: +"+k:"";
-            tempStats+=odp!=0?"ODP: +"+odp:"";
-            tempStats+=zr!=0?"ZR: +"+zr:"";
-            tempStats+=in!=0?"INT: +"+in:"";
-            tempStats+=sw!=0?"SW: +"+sw:"";
-            tempStats+=ogd!=0?"OGD: +"+ogd:"";
-            tempStats+=a!=0?"A: +"+a:"";
-            tempStats+=zyw!=0?"ŻYW: +"+zyw:"";
-            tempStats+=s!=0?"S: +"+s:"";
-            tempStats+=wt!=0?"WT: +"+wt:"";
-            tempStats+=sz!=0?"SZ: +"+sz:"";
-            tempStats+=mag!=0?"MAG: +"+mag:"";
-            tempStats+=po!=0?"PO: +"+po:"";
-            tempStats+=pp!=0?"PP: +"+pp:"";
             
-
-            message = 
-                    String.format("%-6s %s %n","Nazwa:", tname) +                 
-                    String.format("%-6s %s %n","Opis:", tdesc) + 
-                    String.format("%-6s %s %n","Wpływa na:", tempSkills) +
-                    String.format("%-6s %s %n","Statystyki:", tempStats);  
-            JTextPane jt = new JTextPane();
-            jt.setText(message);            
-            jt.setPreferredSize(new Dimension(140, 220));
-            jt.setOpaque(true);
-            jt.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
-            jt.setEditable(false);
-            jt.setBackground(null);
-            jt.setAutoscrolls(true);
-
-            JOptionPane.showMessageDialog(this, jt, "Dodano zdolność", JOptionPane.PLAIN_MESSAGE);
-
+            talents.get(talents.size()-1).show();
+            
             clearFields();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -358,6 +422,70 @@ public class AddTalent extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         listToList(jList1, jList2, tempSkills, tempAddedSkills);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        PlayerSheet.checkField(jTextField2, evt);
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        PlayerSheet.checkField(jTextField3, evt);
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        PlayerSheet.checkField(jTextField4, evt);
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
+        PlayerSheet.checkField(jTextField5, evt);
+    }//GEN-LAST:event_jTextField5KeyReleased
+
+    private void jTextField7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyReleased
+        PlayerSheet.checkField(jTextField7, evt);
+    }//GEN-LAST:event_jTextField7KeyReleased
+
+    private void jTextField8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField8KeyReleased
+        PlayerSheet.checkField(jTextField8, evt);
+    }//GEN-LAST:event_jTextField8KeyReleased
+
+    private void jTextField9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyReleased
+        PlayerSheet.checkField(jTextField9, evt);
+    }//GEN-LAST:event_jTextField9KeyReleased
+
+    private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
+        PlayerSheet.checkField(jTextField6, evt);
+    }//GEN-LAST:event_jTextField6KeyReleased
+
+    private void jTextField14KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyReleased
+        PlayerSheet.checkField(jTextField14, evt);
+    }//GEN-LAST:event_jTextField14KeyReleased
+
+    private void jTextField15KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField15KeyReleased
+        PlayerSheet.checkField(jTextField15, evt);
+    }//GEN-LAST:event_jTextField15KeyReleased
+
+    private void jTextField16KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyReleased
+        PlayerSheet.checkField(jTextField16, evt);
+    }//GEN-LAST:event_jTextField16KeyReleased
+
+    private void jTextField17KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField17KeyReleased
+        PlayerSheet.checkField(jTextField17, evt);
+    }//GEN-LAST:event_jTextField17KeyReleased
+
+    private void jTextField12KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField12KeyReleased
+        PlayerSheet.checkField(jTextField12, evt);
+    }//GEN-LAST:event_jTextField12KeyReleased
+
+    private void jTextField13KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField13KeyReleased
+        PlayerSheet.checkField(jTextField13, evt);
+    }//GEN-LAST:event_jTextField13KeyReleased
+
+    private void jTextField10KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField10KeyReleased
+        PlayerSheet.checkField(jTextField10, evt);
+    }//GEN-LAST:event_jTextField10KeyReleased
+
+    private void jTextField11KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyReleased
+        PlayerSheet.checkField(jTextField11, evt);
+    }//GEN-LAST:event_jTextField11KeyReleased
     void arrayToModel(DefaultListModel model, ArrayList array)
     {
         for(int i=0; i<array.size() ; i++)

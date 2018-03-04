@@ -5,6 +5,7 @@
  */
 package warhammerplayersheet;
 
+import com.sun.glass.events.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -14,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -324,6 +326,22 @@ public class PlayerSheet extends javax.swing.JFrame {
     {
         Object[] options = {"Hai", "Īe"};
         return JOptionPane.showOptionDialog(null, "Usunąć?", "Usuwanie elementu", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0;
+    }
+    public static void checkField(JTextField field, java.awt.event.KeyEvent evt)
+    {
+        String temp = field.getText();        
+        if(!isNumber(evt.getKeyChar()) && !evt.isActionKey() && evt.getKeyCode()!=KeyEvent.VK_BACKSPACE)
+        {            
+            field.setText(temp.substring(0, temp.length()-1));            
+        } 
+        if(temp.length()>2)
+        {
+            field.setText(temp.substring(0, 2));
+        }
+    }
+    public static boolean isNumber(char input)
+    {
+        return input >= '0' && input < '9';
     }
     /**
      * @param args the command line arguments

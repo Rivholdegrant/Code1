@@ -5,8 +5,11 @@
  */
 package warhammerplayersheet;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.Serializable;
 import javax.swing.JOptionPane;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -48,6 +51,20 @@ class Skill implements Serializable{
     }   
     void show()
     {
-        
+        String message = 
+                String.format("%-6s %s %n","Nazwa:", name) + 
+                String.format("%-6s %s %n","Typ:", getType()) +
+                String.format("%-6s %s %n","Cecha:", stat) +
+                String.format("%-6s %s","Opis:", description);            
+        JTextPane jt = new JTextPane();
+        jt.setText(message);            
+        jt.setPreferredSize(new Dimension(140, 220));        
+        jt.setOpaque(true);
+        jt.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
+        jt.setEditable(false);
+        jt.setBackground(null);
+        jt.setAutoscrolls(true);
+            
+        JOptionPane.showMessageDialog(null, jt, "Umiejętność", JOptionPane.PLAIN_MESSAGE);
     }
 }

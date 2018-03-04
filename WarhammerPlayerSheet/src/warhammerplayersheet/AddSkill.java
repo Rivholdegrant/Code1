@@ -135,27 +135,16 @@ public class AddSkill extends javax.swing.JFrame {
             }
             
             skills.add(new Skill(tname, tstat, tdesc, jCheckBox1.isSelected()));
-            message = 
-                    String.format("%-6s %s %n","Nazwa:", tname) + 
-                    String.format("%-6s %s %n","Typ:", tadvanced) +
-                    String.format("%-6s %s %n","Cecha:", tstat) +
-                    String.format("%-6s %s","Opis:", tdesc);            
-            JTextPane jt = new JTextPane();
-            jt.setText(message);            
-            jt.setPreferredSize(new Dimension(140, 220));
-            jt.setOpaque(true);
-            jt.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
-            jt.setEditable(false);
-            jt.setBackground(null);
-            jt.setAutoscrolls(true);
-            
-            JOptionPane.showMessageDialog(this, jt, "Dodano umiejętność", JOptionPane.PLAIN_MESSAGE);
-            this.dispose();
-            new AddSkill(skills).setVisible(true);
-            
+            skills.get(skills.size()-1).show(); 
+            clearFields();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    void clearFields()
+    {
+        this.dispose();
+        new AddSkill(skills).setVisible(true);
+    }
+    
     /**
      * @param args the command line arguments
      */    

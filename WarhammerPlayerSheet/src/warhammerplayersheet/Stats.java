@@ -198,7 +198,46 @@ public class Stats implements Serializable{
     void setPP(int val)
     {
         stats[15]=val;
-    }       
+    }    
+    String show()
+    {
+        int ww  = getWW();
+        int us  = getUS();
+        int k   = getK();
+        int odp = getODP();
+        int zr  = getZR();
+        int in  = getINT();
+        int sw  = getSW();
+        int ogd = getOGD();
+        int a   = getA();
+        int zyw = getZYW();
+        int s   = getS();
+        int wt  = getWT();
+        int sz  = getSZ();
+        int mag = getMAG();
+        int po  = getPO();
+        int pp  = getPP();
+        
+        String tempStats = "";
+        tempStats+=ww!=0?" WW: +"+ww:"";
+        tempStats+=us!=0?" US: +"+us:"";
+        tempStats+=k!=0?" K: +"+k:"";
+        tempStats+=odp!=0?" ODP: +"+odp:"";
+        tempStats+=zr!=0?" ZR: +"+zr:"";
+        tempStats+=in!=0?" INT: +"+in:"";
+        tempStats+=sw!=0?" SW: +"+sw:"";
+        tempStats+=ogd!=0?" OGD: +"+ogd:"\n";
+        tempStats+=a!=0?" A: +"+a:"";
+        tempStats+=zyw!=0?" ŻYW: +"+zyw:"";
+        tempStats+=s!=0?" S: +"+s:"";
+        tempStats+=wt!=0?" WT: +"+wt:"";
+        tempStats+=sz!=0?" SZ: +"+sz:"";
+        tempStats+=mag!=0?" MAG: +"+mag:"";
+        tempStats+=po!=0?" PO: +"+po:"";
+        tempStats+=pp!=0?" PP: +"+pp:"";
+        
+        return tempStats;
+    }
 }
     
 
