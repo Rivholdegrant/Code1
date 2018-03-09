@@ -65,6 +65,9 @@
       <Properties>
         <Property name="toolTipText" type="java.lang.String" value="Nazwa"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField1FocusGained"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -81,6 +84,9 @@
             <Property name="toolTipText" type="java.lang.String" value="Opis"/>
             <Property name="wrapStyleWord" type="boolean" value="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextArea1FocusGained"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -107,7 +107,7 @@ public class BrowseAssets extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void browseProfessionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseProfessionActionPerformed
-        // TODO add your handling code here:
+        new BrowseProfession(professions,skills, talents, equipment).setVisible(true);
     }//GEN-LAST:event_browseProfessionActionPerformed
 
     private void browseSkillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseSkillActionPerformed

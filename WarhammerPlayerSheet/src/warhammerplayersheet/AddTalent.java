@@ -80,6 +80,11 @@ public class AddTalent extends javax.swing.JFrame {
         setResizable(false);
 
         jTextField1.setToolTipText("Nazwa");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
@@ -87,6 +92,11 @@ public class AddTalent extends javax.swing.JFrame {
         jTextArea1.setToolTipText("Opis");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setMinimumSize(new java.awt.Dimension(50, 8));
+        jTextArea1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextArea1FocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Zapisz");
@@ -486,6 +496,14 @@ public class AddTalent extends javax.swing.JFrame {
     private void jTextField11KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField11KeyReleased
         PlayerSheet.checkField(jTextField11, evt);
     }//GEN-LAST:event_jTextField11KeyReleased
+
+    private void jTextArea1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusGained
+        jTextArea1.setBackground(null);
+    }//GEN-LAST:event_jTextArea1FocusGained
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        jTextField1.setBackground(null);
+    }//GEN-LAST:event_jTextField1FocusGained
     void arrayToModel(DefaultListModel model, ArrayList array)
     {
         for(int i=0; i<array.size() ; i++)

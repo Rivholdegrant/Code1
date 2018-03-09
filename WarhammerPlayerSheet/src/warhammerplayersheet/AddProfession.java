@@ -149,8 +149,16 @@ public class AddProfession extends javax.swing.JFrame {
 
         jTextField1.setToolTipText("Nazwa profesji");
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
         });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -164,6 +172,11 @@ public class AddProfession extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jTextArea1.setToolTipText("Opis profesji");
         jTextArea1.setWrapStyleWord(true);
+        jTextArea1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextArea1FocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         wwfield.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
@@ -568,8 +581,32 @@ public class AddProfession extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jTextField1.setBackground(null);
-        jTextArea1.setBackground(null);
+        
+        for(int i=0 ; i<professions.size() ; i++)
+        {                       
+            if(jTextField1.getText().equals(professions.get(i).getName()))
+            {
+                System.out.println("Taka profesja istnieje");
+                
+                Object[] options = {"Tak", "Nie"};
+                if(JOptionPane.showOptionDialog(this, "Taka profesja istnieje. Zastąpić?", "Profesja istnieje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
+                {                    
+                    for(Profession pro : professions)
+                    {
+                        if(pro.getName().equals(jTextField1.getText()))
+                        {
+                            professions.remove(pro);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }                
+            }
+        }    
+        
         if(jTextField1.getText().isEmpty() || jTextArea1.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Wypełnij wszystkie pola", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -589,7 +626,7 @@ public class AddProfession extends javax.swing.JFrame {
             int a   = Integer.parseInt(afield.getText().equals("")?"0":afield.getText());
             int zyw = Integer.parseInt(zywfield.getText().equals("")?"0":zywfield.getText());
             int s   = Integer.parseInt(sfield.getText().equals("")?"0":sfield.getText());
-            int wt  = Integer.parseInt(wtfield.getText().equals("")?"0":sfield.getText());
+            int wt  = Integer.parseInt(wtfield.getText().equals("")?"0":wtfield.getText());
             int sz  = Integer.parseInt(szfield.getText().equals("")?"0":szfield.getText());
             int mag = Integer.parseInt(magfield.getText().equals("")?"0":magfield.getText());
             int po  = Integer.parseInt(pofield.getText().equals("")?"0":pofield.getText());
@@ -602,10 +639,18 @@ public class AddProfession extends javax.swing.JFrame {
             professions.add(new Profession(jTextField1.getText(), jTextArea1.getText(), tempstats, 
                     addedSkills, 
                     addedTalents, 
-                    addedEq, addedEntries, addedExits, jCheckBox1.isEnabled()));
+                    addedEq, addedEntries, addedExits, jCheckBox1.isSelected()));
 
             professions.get(professions.size()-1).show();            
-            clearFields();
+            if(jTextField1.isEnabled())
+            {
+                clearFields();
+            }
+            else
+            {
+                this.dispose();
+                new BrowseProfession(professions, skills, talents, equipment).setVisible(true);
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     void clearFields()
@@ -664,31 +709,31 @@ public class AddProfession extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-        if(jTextField1.getText().equals(""))
-        {
-            enableAll(false);
-            return;
-        }
-        
-        for(int i=0 ; i<professions.size() ; i++)
-        {
-            enableAll(true);            
-            if(jTextField1.getText().equals(professions.get(i).getName()))
-            {
-                System.out.println("Taka profesja istnieje");
-                
-                Object[] options = {"Oczywiście", "Naah"};
-                if(JOptionPane.showOptionDialog(this, "Taka profesja istnieje. Edytować?", "Profesja istnieje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
-                {
-                    loadProfession(jTextField1.getText());
-                }
-                else
-                {
-                    enableAll(false);
-                }
-                return;
-            }
-        }        
+//        if(jTextField1.getText().equals(""))
+//        {
+//            enableAll(false);
+//            return;
+//        }
+//        
+//        for(int i=0 ; i<professions.size() ; i++)
+//        {
+//            enableAll(true);            
+//            if(jTextField1.getText().equals(professions.get(i).getName()))
+//            {
+//                System.out.println("Taka profesja istnieje");
+//                
+//                Object[] options = {"Oczywiście", "Naah"};
+//                if(JOptionPane.showOptionDialog(this, "Taka profesja istnieje. Edytować?", "Profesja istnieje", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
+//                {
+//                    loadProfession(jTextField1.getText());
+//                }
+//                else
+//                {
+//                    enableAll(false);
+//                }
+//                return;
+//            }
+//        }        
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void wwfieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_wwfieldKeyReleased
@@ -760,6 +805,18 @@ public class AddProfession extends javax.swing.JFrame {
             jTextField1FocusLost(null);
         }
     }//GEN-LAST:event_jTextField1KeyPressed
+
+    private void jTextArea1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusGained
+        jTextArea1.setBackground(null);
+    }//GEN-LAST:event_jTextArea1FocusGained
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        jTextField1.setBackground(null);
+    }//GEN-LAST:event_jTextField1FocusGained
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
     
     void enableAll(boolean bool)
     {
@@ -805,6 +862,7 @@ public class AddProfession extends javax.swing.JFrame {
             {
                 Profession temp = professions.get(i);
                 
+                jTextField1.setText(name);
                 jTextArea1.setText(temp.getDescription());
                 jCheckBox1.setSelected(temp.isAdvanced());
                 wwfield.setText  (temp.getStats().getWW()==0?"":""+temp.getStats().getWW());
@@ -893,6 +951,10 @@ public class AddProfession extends javax.swing.JFrame {
         {
             array.add(model.get(i));
         }            
+    }
+    javax.swing.JTextField getjTextField1()
+    {
+        return jTextField1;
     }
     
     /**

@@ -24,7 +24,7 @@ public class Profession implements Serializable{
     private Equipment[] equipment;
     private Profession[] entries;
     private Profession[] exits;
-    private boolean advanced;
+    private boolean advanced=false;
     
     public Profession(String name, String description, Stats stats, Skill[] skills, Talent[] talents, Equipment[] equipment, Profession[] entries, Profession[] exits, boolean advanced)
     {
@@ -114,7 +114,7 @@ public class Profession implements Serializable{
     }
     String advanced()
     {
-        return advanced?"Zaawansowana":"Podstawowa";
+        return isAdvanced()?"Zaawansowana":"Podstawowa";
     }
     String listToString(Object[] list)
     {
@@ -129,14 +129,14 @@ public class Profession implements Serializable{
     void show()
     {
         String message = 
-                String.format("%-6s %s %n","Nazwa:", name) + 
-                String.format("%-6s %s %n","Typ:", advanced) +
-                String.format("%-6s %s %n","Opis:", description) +
-                String.format("%-6s %n %s %n","Rozwinięcia:", stats.show()) +
-                String.format("%-6s %n %s %n","Umiejętności:", listToString(skills)) +
-                String.format("%-6s %n %s %n","Zdolności:", listToString(talents)) +
-                String.format("%-6s %s %n","Profesje wejścia:", listToString(entries))+
-                String.format("%-6s %s %n","Profesje wyjścia:", listToString(exits));
+                String.format("%-6s %s%n","Nazwa:", name) + 
+                String.format("%-6s %s%n","Typ:", advanced()) +
+                String.format("%-6s %s%n","Opis:", description) +
+                String.format("%-6s %n%s %n","Rozwinięcia:", stats.show()) +
+                String.format("%-6s %n%s %n","Umiejętności:", listToString(skills)) +
+                String.format("%-6s %n%s %n","Zdolności:", listToString(talents)) +
+                String.format("%-6s %s%n","Profesje wejścia:", listToString(entries))+
+                String.format("%-6s %s%n","Profesje wyjścia:", listToString(exits));
                 ;            
         JTextPane jt = new JTextPane();
         jt.setText(message);            

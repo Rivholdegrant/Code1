@@ -14,10 +14,27 @@ import java.io.Serializable;
 public class Stats implements Serializable{
        
     private final int[] stats;
-    
+     
     public Stats()
     {
-        stats = new int[16];
+        stats = new int[16];        
+        stats[0] = 0;
+        stats[1] = 0;
+        stats[2] = 0;
+        stats[3] = 0;
+        stats[4] = 0;
+        stats[5] = 0;
+        stats[6] = 0;
+        stats[7] = 0; 
+        
+        stats[8] = 0;
+        stats[9] = 0;
+        stats[10] = 0;
+        stats[11] = 0;
+        stats[12] = 0;
+        stats[13] = 0;
+        stats[14] = 0;
+        stats[15] = 0; 
     }
     public Stats(int ww, int us, int k, int odp, int zr, int in, int sw, int ogd)
     {
@@ -30,6 +47,15 @@ public class Stats implements Serializable{
         stats[5] = in;
         stats[6] = sw;
         stats[7] = ogd; 
+        
+        stats[8] = 0;
+        stats[9] = 0;
+        stats[10] = 0;
+        stats[11] = 0;
+        stats[12] = 0;
+        stats[13] = 0;
+        stats[14] = 0;
+        stats[15] = 0; 
     }
     public Stats(int ww, int us, int k, int odp, int zr, int in, int sw, int ogd, int a, int zyw, int s, int wt, int sz, int mag, int po, int pp)
     {
@@ -219,22 +245,41 @@ public class Stats implements Serializable{
         int pp  = getPP();
         
         String tempStats = "";
-        tempStats+=ww!=0?" WW: +"+ww:"";
-        tempStats+=us!=0?" US: +"+us:"";
-        tempStats+=k!=0?" K: +"+k:"";
-        tempStats+=odp!=0?" ODP: +"+odp:"";
-        tempStats+=zr!=0?" ZR: +"+zr:"";
-        tempStats+=in!=0?" INT: +"+in:"";
-        tempStats+=sw!=0?" SW: +"+sw:"";
-        tempStats+=ogd!=0?" OGD: +"+ogd:"\n";
-        tempStats+=a!=0?" A: +"+a:"";
-        tempStats+=zyw!=0?" ŻYW: +"+zyw:"";
-        tempStats+=s!=0?" S: +"+s:"";
-        tempStats+=wt!=0?" WT: +"+wt:"";
-        tempStats+=sz!=0?" SZ: +"+sz:"";
-        tempStats+=mag!=0?" MAG: +"+mag:"";
-        tempStats+=po!=0?" PO: +"+po:"";
-        tempStats+=pp!=0?" PP: +"+pp:"";
+        
+         
+        tempStats+=ww!= 0?String.format("%-3s +%2d ","WW", ww):"";
+        tempStats+=us!= 0?String.format("%-3s +%2d ","US", us):"";
+        tempStats+=k!=  0?String.format("%-3s +%2d ","K", k):"";
+        tempStats+=odp!=0?String.format("%-3s +%2d ","ODP", odp):"";
+        tempStats+=zr!= 0?String.format("%-3s +%2d ","ZR", zr):"";
+        tempStats+=in!= 0?String.format("%-3s +%2d ","INT", in):"";
+        tempStats+=sw!= 0?String.format("%-3s +%2d ","SW", sw):"";
+        tempStats+=ogd!=0?String.format("%-3s +%2d %n","OGD", ogd):"\n";
+        tempStats+=a!=  0?String.format("%-3s +%2d ","A", a):"";
+        tempStats+=zyw!=0?String.format("%-3s +%2d ","ZYW", zyw):"";
+        tempStats+=s!=  0?String.format("%-3s +%2d ","A", s):"";
+        tempStats+=wt!= 0?String.format("%-3s +%2d ","WT", wt):"";
+        tempStats+=sz!= 0?String.format("%-3s +%2d ","SZ", sz):"";
+        tempStats+=mag!=0?String.format("%-3s +%2d ","MAG", mag):"";
+        tempStats+=po!= 0?String.format("%-3s +%2d ","PO", po):"";
+        tempStats+=pp!= 0?String.format("%-3s +%2d ","PP", pp):"";        
+                
+//        tempStats+=ww!= 0?" WW: +"+ww:"";
+//        tempStats+=us!= 0?" US: +"+us:"";
+//        tempStats+=k!=  0?" K:  +"+k:"";
+//        tempStats+=odp!=0?" ODP:+"+odp:"";
+//        tempStats+=zr!= 0?" ZR: +"+zr:"";
+//        tempStats+=in!= 0?" INT:+"+in:"";
+//        tempStats+=sw!= 0?" SW: +"+sw:"";
+//        tempStats+=ogd!=0?" OGD:+"+ogd:"\n";
+//        tempStats+=a!=  0?" A:  +"+a:"";
+//        tempStats+=zyw!=0?" ŻYW:+"+zyw:"";
+//        tempStats+=s!=  0?" S:  +"+s:"";
+//        tempStats+=wt!= 0?" WT: +"+wt:"";
+//        tempStats+=sz!= 0?" SZ: +"+sz:"";
+//        tempStats+=mag!=0?" MAG:+"+mag:"";
+//        tempStats+=po!= 0?" PO: +"+po:"";
+//        tempStats+=pp!= 0?" PP: +"+pp:"";
         
         return tempStats;
     }

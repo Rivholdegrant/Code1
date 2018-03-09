@@ -49,12 +49,22 @@ public class AddSkill extends javax.swing.JFrame {
         setResizable(false);
 
         jTextField1.setToolTipText("Nazwa");
+        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1FocusGained(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setToolTipText("Opis");
         jTextArea1.setWrapStyleWord(true);
+        jTextArea1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextArea1FocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Krzepa", "Odporność", "Zręczność", "Inteligencja", "Siła Woli", "Ogłada", "Różne" }));
@@ -139,6 +149,14 @@ public class AddSkill extends javax.swing.JFrame {
             clearFields();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
+        jTextField1.setBackground(null);
+    }//GEN-LAST:event_jTextField1FocusGained
+
+    private void jTextArea1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusGained
+        jTextArea1.setBackground(null);
+    }//GEN-LAST:event_jTextArea1FocusGained
     void clearFields()
     {
         this.dispose();

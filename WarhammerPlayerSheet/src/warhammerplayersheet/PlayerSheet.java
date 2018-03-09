@@ -215,6 +215,12 @@ public class PlayerSheet extends javax.swing.JFrame {
         Object[] options = {"Zamykamy", "OH NEEIN!"};
         if(JOptionPane.showOptionDialog(this, "Zamknąć?", "Zamykanie", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null)==0)
         {            
+            Object[] temp = {"да", "не"};
+            if(JOptionPane.showOptionDialog(this, "Zapisać zmiany?", "Zapisywanie zmian", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, temp, null)==0)
+            {
+                save.doClick();
+            }           
+            
             System.out.println("Zapisywanie danych");     
             try {
                 save();
