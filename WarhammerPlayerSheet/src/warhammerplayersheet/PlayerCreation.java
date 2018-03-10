@@ -5,10 +5,12 @@
  */
 package warhammerplayersheet;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +39,9 @@ public class PlayerCreation extends javax.swing.JFrame {
     DefaultListModel tempAddedExits = new DefaultListModel<Profession>();
     
     Race races;
+    
+    Stats tempRace=new Stats();
+    
     ArrayList<Profession> professions;
     
     public PlayerCreation(PlayerSheet playersheet, Race races) {
@@ -48,11 +53,16 @@ public class PlayerCreation extends javax.swing.JFrame {
         raceList.setModel(new javax.swing.DefaultComboBoxModel<>(races.getList()));        
         //System.out.println(playersheet.professions.get(1).getName());
         
+                   
         DefaultComboBoxModel professionModel = new DefaultComboBoxModel();   
         arrayToModel(professionModel, professions.toArray());
-        
         professionList.setModel(professionModel);
+        if(!professions.isEmpty())
+        {
+            professionList.setSelectedIndex(0);
+        }
         
+        raceList.setSelectedIndex(0);
         
     }
 
@@ -139,6 +149,11 @@ public class PlayerCreation extends javax.swing.JFrame {
         setResizable(false);
 
         characterName.setToolTipText("Imię");
+        characterName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                characterNameFocusGained(evt);
+            }
+        });
 
         raceList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +171,7 @@ public class PlayerCreation extends javax.swing.JFrame {
 
         jLabel2.setText("Profesja");
 
+        statOgdPo.setBackground(new java.awt.Color(204, 255, 255));
         statOgdPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOgdPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOgdPo.setMinimumSize(new java.awt.Dimension(24, 24));
@@ -165,32 +181,68 @@ public class PlayerCreation extends javax.swing.JFrame {
                 statOgdPoActionPerformed(evt);
             }
         });
+        statOgdPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statOgdPoKeyReleased(evt);
+            }
+        });
 
+        statSwPo.setBackground(new java.awt.Color(204, 255, 255));
         statSwPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statSwPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statSwPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statSwPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statSwPoKeyReleased(evt);
+            }
+        });
 
+        statIntPo.setBackground(new java.awt.Color(204, 255, 255));
         statIntPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statIntPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statIntPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statIntPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statIntPoKeyReleased(evt);
+            }
+        });
 
+        statKPo.setBackground(new java.awt.Color(204, 255, 255));
         statKPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statKPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statKPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statKPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statKPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statKPoKeyReleased(evt);
+            }
+        });
 
+        statOdpPo.setBackground(new java.awt.Color(204, 255, 255));
         statOdpPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOdpPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOdpPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statOdpPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statOdpPoKeyReleased(evt);
+            }
+        });
 
+        statZrPo.setBackground(new java.awt.Color(204, 255, 255));
         statZrPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statZrPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statZrPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statZrPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statZrPoKeyReleased(evt);
+            }
+        });
 
+        statWwPo.setBackground(new java.awt.Color(204, 255, 255));
         statWwPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statWwPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statWwPo.setMinimumSize(new java.awt.Dimension(24, 24));
@@ -200,121 +252,116 @@ public class PlayerCreation extends javax.swing.JFrame {
                 statWwPoActionPerformed(evt);
             }
         });
+        statWwPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statWwPoKeyReleased(evt);
+            }
+        });
 
+        statUsPo.setBackground(new java.awt.Color(204, 255, 255));
         statUsPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statUsPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statUsPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statUsPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statUsPo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statUsPoKeyReleased(evt);
+            }
+        });
 
         statUsA.setEditable(false);
         statUsA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statUsA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statUsA.setFocusable(false);
         statUsA.setMinimumSize(new java.awt.Dimension(24, 24));
         statUsA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statWwA.setEditable(false);
         statWwA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statWwA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statWwA.setFocusable(false);
         statWwA.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statKA.setEditable(false);
         statKA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statKA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statKA.setFocusable(false);
         statKA.setMinimumSize(new java.awt.Dimension(24, 24));
         statKA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOdpA.setEditable(false);
         statOdpA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOdpA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOdpA.setFocusable(false);
         statOdpA.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statZrA.setEditable(false);
         statZrA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statZrA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statZrA.setFocusable(false);
         statZrA.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statIntA.setEditable(false);
         statIntA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statIntA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statIntA.setFocusable(false);
         statIntA.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statSwA.setEditable(false);
         statSwA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statSwA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statSwA.setFocusable(false);
         statSwA.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOgdA.setEditable(false);
         statOgdA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOgdA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOgdA.setFocusable(false);
         statOgdA.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdA.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statUsR.setEditable(false);
         statUsR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statUsR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statUsR.setFocusable(false);
         statUsR.setMinimumSize(new java.awt.Dimension(24, 24));
         statUsR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statWwR.setEditable(false);
         statWwR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statWwR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statWwR.setFocusable(false);
         statWwR.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statKR.setEditable(false);
         statKR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statKR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statKR.setFocusable(false);
         statKR.setMinimumSize(new java.awt.Dimension(24, 24));
         statKR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOdpR.setEditable(false);
         statOdpR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOdpR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOdpR.setFocusable(false);
         statOdpR.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statZrR.setEditable(false);
         statZrR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statZrR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statZrR.setFocusable(false);
         statZrR.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statIntR.setEditable(false);
         statIntR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statIntR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statIntR.setFocusable(false);
         statIntR.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statSwR.setEditable(false);
         statSwR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statSwR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statSwR.setFocusable(false);
         statSwR.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwR.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOgdR.setEditable(false);
         statOgdR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOgdR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOgdR.setFocusable(false);
         statOgdR.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdR.setPreferredSize(new java.awt.Dimension(24, 24));
 
@@ -361,119 +408,116 @@ public class PlayerCreation extends javax.swing.JFrame {
         statWwA1.setEditable(false);
         statWwA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statWwA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statWwA1.setFocusable(false);
         statWwA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statUsA1.setEditable(false);
         statUsA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statUsA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statUsA1.setFocusable(false);
         statUsA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statUsA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statKA1.setEditable(false);
         statKA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statKA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statKA1.setFocusable(false);
         statKA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statKA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOdpA1.setEditable(false);
         statOdpA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOdpA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOdpA1.setFocusable(false);
         statOdpA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statZrA1.setEditable(false);
         statZrA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statZrA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statZrA1.setFocusable(false);
         statZrA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statIntA1.setEditable(false);
         statIntA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statIntA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statIntA1.setFocusable(false);
         statIntA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statSwA1.setEditable(false);
         statSwA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statSwA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statSwA1.setFocusable(false);
         statSwA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOgdA1.setEditable(false);
         statOgdA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOgdA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOgdA1.setFocusable(false);
         statOgdA1.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdA1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOgdR1.setEditable(false);
         statOgdR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOgdR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOgdR1.setFocusable(false);
         statOgdR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statSwR1.setBackground(new java.awt.Color(204, 255, 255));
         statSwR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statSwR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statSwR1.setFocusable(false);
         statSwR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwR1.setPreferredSize(new java.awt.Dimension(24, 24));
+        statSwR1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statSwR1KeyReleased(evt);
+            }
+        });
 
         statIntR1.setEditable(false);
         statIntR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statIntR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statIntR1.setFocusable(false);
         statIntR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statZrR1.setEditable(false);
         statZrR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statZrR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statZrR1.setFocusable(false);
         statZrR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statOdpR1.setEditable(false);
         statOdpR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOdpR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statOdpR1.setFocusable(false);
         statOdpR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statKR1.setEditable(false);
         statKR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statKR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statKR1.setFocusable(false);
         statKR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statKR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statUsR1.setEditable(false);
         statUsR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statUsR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statUsR1.setFocusable(false);
         statUsR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statUsR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
         statWwR1.setEditable(false);
         statWwR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statWwR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        statWwR1.setFocusable(false);
         statWwR1.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwR1.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statUsPo1.setBackground(new java.awt.Color(204, 255, 255));
         statUsPo1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statUsPo1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statUsPo1.setMinimumSize(new java.awt.Dimension(24, 24));
         statUsPo1.setPreferredSize(new java.awt.Dimension(24, 24));
+        statUsPo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statUsPo1KeyReleased(evt);
+            }
+        });
 
+        statOgdPo1.setBackground(new java.awt.Color(204, 255, 255));
         statOgdPo1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         statOgdPo1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOgdPo1.setMinimumSize(new java.awt.Dimension(24, 24));
@@ -481,6 +525,11 @@ public class PlayerCreation extends javax.swing.JFrame {
         statOgdPo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 statOgdPo1ActionPerformed(evt);
+            }
+        });
+        statOgdPo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                statOgdPo1KeyReleased(evt);
             }
         });
 
@@ -573,9 +622,9 @@ public class PlayerCreation extends javax.swing.JFrame {
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -745,9 +794,43 @@ public class PlayerCreation extends javax.swing.JFrame {
     private void statOgdPoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statOgdPoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_statOgdPoActionPerformed
-
+    
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
-        // TODO add your handling code here:
+        if(characterName.getText().isEmpty())
+        {
+            characterName.setBackground(Color.red);
+            return;
+        }
+        if(statWwPo.getText().isEmpty() || statUsPo.getText().isEmpty() || statKPo.getText().isEmpty() || statOdpPo.getText().isEmpty() ||
+                statZrPo.getText().isEmpty() || statIntPo.getText().isEmpty() || statSwPo.getText().isEmpty() || statOgdPo.getText().isEmpty() ||
+                statUsPo1.getText().isEmpty() || statOgdPo1.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Wypełnij statystyki", "Błąd", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int ww  = Integer.parseInt(statWwPo.getText());
+        int us  = Integer.parseInt(statUsPo.getText());
+        int k   = Integer.parseInt(statKPo.getText());
+        int odp = Integer.parseInt(statOdpPo.getText());
+        int zr  = Integer.parseInt(statZrPo.getText());
+        int in  = Integer.parseInt(statIntPo.getText());
+        int sw  = Integer.parseInt(statSwPo.getText());
+        int ogd = Integer.parseInt(statOgdPo.getText());
+        int a   = 1;    
+        int zyw = 1;
+        int s   = 1;
+        int wt  = 1;
+        int sz  = 1;
+        int mag = 1;
+        int po  = 1;
+        int pp  = 1;
+        
+        Stats base =            new Stats(ww, us, k, odp, zr, in, sw, ogd);
+        Stats fromRace =        tempRace;
+        Stats possibleUpgrade = ((Profession)professionList.getSelectedItem()).getStats() ;
+        
+        playersheet.players.add(new Player(characterName.getText(), raceList.getSelectedItem().toString(), (Profession)professionList.getSelectedItem(),base, fromRace, possibleUpgrade ));
     }//GEN-LAST:event_confirmActionPerformed
 
     private void statOgdPo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statOgdPo1ActionPerformed
@@ -768,6 +851,65 @@ public class PlayerCreation extends javax.swing.JFrame {
     private void raceListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raceListActionPerformed
         recalculate();
     }//GEN-LAST:event_raceListActionPerformed
+
+    private void statWwPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statWwPoKeyReleased
+        PlayerSheet.checkField(statWwPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statWwPoKeyReleased
+
+    private void statUsPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statUsPoKeyReleased
+        PlayerSheet.checkField(statUsPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statUsPoKeyReleased
+
+    private void statKPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statKPoKeyReleased
+        PlayerSheet.checkField(statKPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statKPoKeyReleased
+
+    private void statOdpPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statOdpPoKeyReleased
+        PlayerSheet.checkField(statOdpPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statOdpPoKeyReleased
+
+    private void statZrPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statZrPoKeyReleased
+        PlayerSheet.checkField(statZrPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statZrPoKeyReleased
+
+    private void statIntPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statIntPoKeyReleased
+        PlayerSheet.checkField(statIntPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statIntPoKeyReleased
+
+    private void statSwPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statSwPoKeyReleased
+        PlayerSheet.checkField(statSwPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statSwPoKeyReleased
+
+    private void statOgdPoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statOgdPoKeyReleased
+        PlayerSheet.checkField(statOgdPo, evt);
+        recalculate();
+    }//GEN-LAST:event_statOgdPoKeyReleased
+
+    private void statUsPo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statUsPo1KeyReleased
+        PlayerSheet.checkField(statUsPo1, evt);
+        recalculate();
+    }//GEN-LAST:event_statUsPo1KeyReleased
+
+    private void statOgdPo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statOgdPo1KeyReleased
+        PlayerSheet.checkField(statOgdPo1, evt);
+        recalculate();
+    }//GEN-LAST:event_statOgdPo1KeyReleased
+
+    private void statSwR1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_statSwR1KeyReleased
+        PlayerSheet.checkField(statSwR1, evt);
+        recalculate();
+    }//GEN-LAST:event_statSwR1KeyReleased
+
+    private void characterNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_characterNameFocusGained
+        characterName.setBackground(null);
+    }//GEN-LAST:event_characterNameFocusGained
     void clearStatsAll()
     {
         statWwPo.setText("");statWwR.setText("");statWwA.setText("");
@@ -780,15 +922,16 @@ public class PlayerCreation extends javax.swing.JFrame {
         statOgdPo.setText("");statOgdR.setText("");statOgdA.setText("");
     }
     void recalculate()
-    {
-        Stats tempRace=new Stats();        
+    {     
+        int sz=3;
+        int zyw=0;
         
         switch(raceList.getSelectedItem().toString())
         {
-            case "Człowiek": tempRace=races.getCzlowiek(); break;
-            case "Elf": tempRace=races.getElf(); break;
-            case "Krasnolud": tempRace=races.getKrasnolud(); break;
-            case "Niziołek": tempRace=races.getNiziolek(); break;
+            case "Człowiek":    {tempRace=races.getCzlowiek();  sz=4; zyw=10;}   break;
+            case "Elf":         {tempRace=races.getElf();       sz=5; zyw=9;}    break;
+            case "Krasnolud":   {tempRace=races.getKrasnolud(); sz=3; zyw=11;}   break;
+            case "Niziołek":    {tempRace=races.getNiziolek();  sz=4; zyw=8;}    break;
         }        
         Profession tempProfession=(Profession)professionList.getSelectedItem();
         if(!professions.isEmpty())
@@ -811,13 +954,85 @@ public class PlayerCreation extends javax.swing.JFrame {
         int sw  = Integer.parseInt(!statSwPo.getText().equals("")?statSwPo.getText():"0")+tempRace.getSW();
         int ogd = Integer.parseInt(!statOgdPo.getText().equals("")?statOgdPo.getText():"0")+tempRace.getOGD();
         int a   = 1;
-        int zyw = 0;
-        int s   = 0;
-        int wt  = 0;
-        int sz  = 0;
+        //zyw based on race
+        zyw= zyw + (Integer.parseInt(!statUsPo1.getText().equals("")?statUsPo1.getText():"0")-1)/3;
+        
+        int s  = k/10;
+        int wt  = odp/10;
+        //sz from race
         int mag = 0;
         int po  = 0;
         int pp  = 0;
+        if(!statOgdPo1.getText().equals(""))
+        {
+            switch(raceList.getSelectedItem().toString())
+            {
+                case "Człowiek":    
+                {
+                    if(Integer.parseInt(statOgdPo1.getText())<5)
+                    {
+                        pp = 2;
+                    }
+                    else if(Integer.parseInt(statOgdPo1.getText())>7)
+                    {                            
+                        pp = 3;
+                    }
+                    else
+                    {
+                        pp = 3;
+                    }
+                }
+                break;
+                case "Elf":         
+                {
+                    if(Integer.parseInt(statOgdPo1.getText())<5)
+                    {
+                        pp = 1;
+                    }
+                    else if(Integer.parseInt(statOgdPo1.getText())>7)
+                    {                            
+                        pp = 2;
+                    }
+                    else
+                    {
+                        pp = 2;
+                    }
+                }
+                break;
+                case "Krasnolud":   
+                {
+                    if(Integer.parseInt(statOgdPo1.getText())<5)
+                    {
+                        pp = 1;
+                    }
+                    else if(Integer.parseInt(statOgdPo1.getText())>7)
+                    {                            
+                        pp = 3;
+                    }
+                    else
+                    {
+                        pp = 2;
+                    }
+                }   
+                break;
+                case "Niziołek":    
+                {
+                    if(Integer.parseInt(statOgdPo1.getText())<5)
+                    {
+                        pp = 2;
+                    }
+                    else if(Integer.parseInt(statOgdPo1.getText())>7)
+                    {                            
+                        pp = 3;
+                    }
+                    else
+                    {
+                        pp = 2;
+                    }
+                }    
+                break;
+            }
+        }
         
         
         statWwR.setText (""+ww);
@@ -829,14 +1044,15 @@ public class PlayerCreation extends javax.swing.JFrame {
         statSwR.setText (""+sw);
         statOgdR.setText(""+ogd); 
         
-        statWwR1.setText (""+ww);
-        statUsR1.setText (""+us);
-        statKR1.setText  (""+k);
-        statOdpR1.setText(""+odp);
-        statZrR1.setText (""+zr);
-        statIntR1.setText(""+in);
-        statSwR1.setText (""+sw);
-        statOgdR1.setText(""+ogd); 
+        statWwR1.setText (""+a);
+        statUsR1.setText (""+zyw);
+        statKR1.setText  (""+s);
+        statOdpR1.setText(""+wt);
+        statZrR1.setText (""+sz);
+        statIntR1.setText(""+mag);
+        statSwR1.setText ("");
+        po=Integer.parseInt(!statSwR1.getText().equals("")?statSwR1.getText():"0");
+        statOgdR1.setText(""+pp); 
         
         
                 

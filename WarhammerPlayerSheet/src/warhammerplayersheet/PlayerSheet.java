@@ -347,7 +347,7 @@ public class PlayerSheet extends javax.swing.JFrame {
     }
     public static boolean isNumber(char input)
     {
-        return input >= '0' && input < '9';
+        return input >= '0' && input <= '9';
     }
     /**
      * @param args the command line arguments
