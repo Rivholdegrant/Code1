@@ -420,6 +420,7 @@ public class AddTalent extends javax.swing.JFrame {
             talents.add(new Talent(tname, tdesc, addedSkills, tempstats));
             
             talents.get(talents.size()-1).show();
+            talents.sort(null);
             
             clearFields();
         }

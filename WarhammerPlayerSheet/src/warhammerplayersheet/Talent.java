@@ -15,7 +15,7 @@ import javax.swing.JTextPane;
  *
  * @author Rivs
  */
-class Talent implements Serializable{
+class Talent implements Serializable, Comparable{
     private String name;    
     private String description;
     private Skill[] impactsSkills;
@@ -69,5 +69,10 @@ class Talent implements Serializable{
 
             JOptionPane.showMessageDialog(null, jt, "Zdolność", JOptionPane.PLAIN_MESSAGE);
 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return name.compareToIgnoreCase(o.toString());         
     }
 }

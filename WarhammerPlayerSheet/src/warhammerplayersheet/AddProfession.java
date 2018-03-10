@@ -652,6 +652,7 @@ public class AddProfession extends javax.swing.JFrame {
                 new BrowseProfession(professions, skills, talents, equipment).setVisible(true);
             }
         }
+        professions.sort(null);
     }//GEN-LAST:event_jButton3ActionPerformed
     void clearFields()
     {        

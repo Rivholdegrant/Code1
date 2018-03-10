@@ -19,7 +19,7 @@ public class Race implements Serializable{
         
     public Race()
     {
-        System.out.println("Wczytano rasy");
+        System.out.println("Wczytano rasy");        
     }
     
     Stats getCzlowiek()
@@ -41,5 +41,9 @@ public class Race implements Serializable{
     String[] getList()
     {
         return new String[]{"Człowiek", "Elf", "Krasnolud", "Niziołek"} ;
+    }
+    public String toString()
+    {
+        return "Człowiek"+" "+"Elf"+" "+"Krasnolud"+" "+"Niziołek";
     }
 }

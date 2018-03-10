@@ -15,7 +15,7 @@ import javax.swing.JTextPane;
  *
  * @author Rivs
  */
-public class Profession implements Serializable{
+public class Profession implements Serializable, Comparable{
     private String name;
     private String description;
     private Stats stats;    
@@ -153,6 +153,10 @@ public class Profession implements Serializable{
     public String toString()
     {
         return name;
+    }
+    @Override
+    public int compareTo(Object o) {
+        return name.compareToIgnoreCase(o.toString());         
     }
            
 }

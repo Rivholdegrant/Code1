@@ -15,7 +15,7 @@ import javax.swing.JTextPane;
  *
  * @author Rivs
  */
-class Skill implements Serializable{
+class Skill implements Serializable, Comparable{
     private String name;
     private String stat;
     private String description;
@@ -66,5 +66,9 @@ class Skill implements Serializable{
         jt.setAutoscrolls(true);
             
         JOptionPane.showMessageDialog(null, jt, "Umiejętność", JOptionPane.PLAIN_MESSAGE);
+    }
+    @Override
+    public int compareTo(Object o) {
+        return name.compareToIgnoreCase(o.toString());         
     }
 }

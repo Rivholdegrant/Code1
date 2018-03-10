@@ -35,7 +35,7 @@ public class PlayerSheet extends javax.swing.JFrame {
     ArrayList<Talent> talents = new ArrayList<Talent>();
     ArrayList<Equipment> equipment = new ArrayList<Equipment>();    
     public PlayerSheet() throws IOException{
-        initComponents();
+        initComponents();        
         load();
     }
 
@@ -134,7 +134,7 @@ public class PlayerSheet extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void new_playerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_new_playerActionPerformed
-        new PlayerCreation(this).setVisible(true);
+        new PlayerCreation(this, races).setVisible(true);
     }//GEN-LAST:event_new_playerActionPerformed
     boolean clearBase()
     {
@@ -301,7 +301,7 @@ public class PlayerSheet extends javax.swing.JFrame {
             temp.close();            
             players = (ArrayList<Player>)temptab[0]; 
             professions= (ArrayList<Profession>)temptab[1];
-            races= (Race)temptab[2];
+            //races= (Race)temptab[2];
             skills= (ArrayList<Skill>)temptab[3];
             talents= (ArrayList<Talent>)temptab[4];
             equipment= (ArrayList<Equipment>)temptab[5];

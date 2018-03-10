@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Rivs
  */
-public class Player implements Serializable{
+public class Player implements Serializable, Comparable{
     //Basic info
     private String name;
     private Race race;
@@ -35,6 +35,10 @@ public class Player implements Serializable{
         name = this.name;
         race = this.race;
         //all race objects need to be created before in app and referenced to constructor from drop-down list in appwindow
+    }
+    @Override
+    public int compareTo(Object o) {
+        return name.compareToIgnoreCase(o.toString());         
     }
     
 }

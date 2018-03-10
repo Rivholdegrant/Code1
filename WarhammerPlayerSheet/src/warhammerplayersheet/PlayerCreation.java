@@ -7,6 +7,8 @@ package warhammerplayersheet;
 
 import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -18,16 +20,38 @@ public class PlayerCreation extends javax.swing.JFrame {
      * Creates new form PlayerCreation
      */
     PlayerSheet playersheet;
-    public PlayerCreation(PlayerSheet playersheet) {
+    
+    Equipment[] addedEq;    
+    DefaultListModel tempAddedEq = new DefaultListModel<Equipment>();
+    
+    Skill[] addedSkills;    
+    DefaultListModel tempAddedSkills = new DefaultListModel<Skill>();
+    
+    Talent[] addedTalents;    
+    DefaultListModel tempAddedTalents = new DefaultListModel<Talent>();
+    
+    Profession[] addedEntries;    
+    DefaultListModel tempAddedEntries = new DefaultListModel<Profession>();
+    
+    Profession[] addedExits;    
+    DefaultListModel tempAddedExits = new DefaultListModel<Profession>();
+    
+    Race races;
+    ArrayList<Profession> professions;
+    
+    public PlayerCreation(PlayerSheet playersheet, Race races) {
         initComponents();
         
-        raceList.setModel(new javax.swing.DefaultComboBoxModel<>(playersheet.races.getList()));        
+        this.races=races;
+        professions=playersheet.professions;
+        
+        raceList.setModel(new javax.swing.DefaultComboBoxModel<>(races.getList()));        
         //System.out.println(playersheet.professions.get(1).getName());
         
-        for(Profession item : playersheet.professions)
-        {
-            professionList.addItem(item.getName());            
-        }
+        DefaultComboBoxModel professionModel = new DefaultComboBoxModel();   
+        arrayToModel(professionModel, professions.toArray());
+        
+        professionList.setModel(professionModel);
         
         
     }
@@ -53,8 +77,8 @@ public class PlayerCreation extends javax.swing.JFrame {
         statOdpPo = new javax.swing.JTextField();
         statZrPo = new javax.swing.JTextField();
         statWwPo = new javax.swing.JTextField();
-        statSsPo = new javax.swing.JTextField();
-        statSsA = new javax.swing.JTextField();
+        statUsPo = new javax.swing.JTextField();
+        statUsA = new javax.swing.JTextField();
         statWwA = new javax.swing.JTextField();
         statKA = new javax.swing.JTextField();
         statOdpA = new javax.swing.JTextField();
@@ -62,7 +86,7 @@ public class PlayerCreation extends javax.swing.JFrame {
         statIntA = new javax.swing.JTextField();
         statSwA = new javax.swing.JTextField();
         statOgdA = new javax.swing.JTextField();
-        statSsR = new javax.swing.JTextField();
+        statUsR = new javax.swing.JTextField();
         statWwR = new javax.swing.JTextField();
         statKR = new javax.swing.JTextField();
         statOdpR = new javax.swing.JTextField();
@@ -75,6 +99,40 @@ public class PlayerCreation extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         confirm = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jLabel7 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList4 = new javax.swing.JList<>();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList<>();
+        jLabel10 = new javax.swing.JLabel();
+        statWwA1 = new javax.swing.JTextField();
+        statUsA1 = new javax.swing.JTextField();
+        statKA1 = new javax.swing.JTextField();
+        statOdpA1 = new javax.swing.JTextField();
+        statZrA1 = new javax.swing.JTextField();
+        statIntA1 = new javax.swing.JTextField();
+        statSwA1 = new javax.swing.JTextField();
+        statOgdA1 = new javax.swing.JTextField();
+        statOgdR1 = new javax.swing.JTextField();
+        statSwR1 = new javax.swing.JTextField();
+        statIntR1 = new javax.swing.JTextField();
+        statZrR1 = new javax.swing.JTextField();
+        statOdpR1 = new javax.swing.JTextField();
+        statKR1 = new javax.swing.JTextField();
+        statUsR1 = new javax.swing.JTextField();
+        statWwR1 = new javax.swing.JTextField();
+        statUsPo1 = new javax.swing.JTextField();
+        statOgdPo1 = new javax.swing.JTextField();
+        statLabels1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tworzenie bohatera");
@@ -82,10 +140,24 @@ public class PlayerCreation extends javax.swing.JFrame {
 
         characterName.setToolTipText("Imię");
 
+        raceList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                raceListActionPerformed(evt);
+            }
+        });
+
+        professionList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                professionListActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Rasa");
 
         jLabel2.setText("Profesja");
 
+        statOgdPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOgdPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOgdPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdPo.setPreferredSize(new java.awt.Dimension(24, 24));
         statOgdPo.addActionListener(new java.awt.event.ActionListener() {
@@ -94,21 +166,33 @@ public class PlayerCreation extends javax.swing.JFrame {
             }
         });
 
+        statSwPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statSwPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statSwPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwPo.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statIntPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statIntPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statIntPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntPo.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statKPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statKPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statKPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statKPo.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statOdpPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOdpPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOdpPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpPo.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statZrPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statZrPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statZrPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrPo.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statWwPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statWwPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statWwPo.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwPo.setPreferredSize(new java.awt.Dimension(24, 24));
         statWwPo.addActionListener(new java.awt.event.ActionListener() {
@@ -117,74 +201,124 @@ public class PlayerCreation extends javax.swing.JFrame {
             }
         });
 
-        statSsPo.setMinimumSize(new java.awt.Dimension(24, 24));
-        statSsPo.setPreferredSize(new java.awt.Dimension(24, 24));
+        statUsPo.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statUsPo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statUsPo.setMinimumSize(new java.awt.Dimension(24, 24));
+        statUsPo.setPreferredSize(new java.awt.Dimension(24, 24));
 
-        statSsA.setFocusable(false);
-        statSsA.setMinimumSize(new java.awt.Dimension(24, 24));
-        statSsA.setPreferredSize(new java.awt.Dimension(24, 24));
+        statUsA.setEditable(false);
+        statUsA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statUsA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statUsA.setFocusable(false);
+        statUsA.setMinimumSize(new java.awt.Dimension(24, 24));
+        statUsA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statWwA.setEditable(false);
+        statWwA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statWwA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statWwA.setFocusable(false);
         statWwA.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statKA.setEditable(false);
+        statKA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statKA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statKA.setFocusable(false);
         statKA.setMinimumSize(new java.awt.Dimension(24, 24));
         statKA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statOdpA.setEditable(false);
+        statOdpA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOdpA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOdpA.setFocusable(false);
         statOdpA.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statZrA.setEditable(false);
+        statZrA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statZrA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statZrA.setFocusable(false);
         statZrA.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statIntA.setEditable(false);
+        statIntA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statIntA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statIntA.setFocusable(false);
         statIntA.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statSwA.setEditable(false);
+        statSwA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statSwA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statSwA.setFocusable(false);
         statSwA.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwA.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statOgdA.setEditable(false);
+        statOgdA.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOgdA.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOgdA.setFocusable(false);
         statOgdA.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdA.setPreferredSize(new java.awt.Dimension(24, 24));
 
-        statSsR.setFocusable(false);
-        statSsR.setMinimumSize(new java.awt.Dimension(24, 24));
-        statSsR.setPreferredSize(new java.awt.Dimension(24, 24));
+        statUsR.setEditable(false);
+        statUsR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statUsR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statUsR.setFocusable(false);
+        statUsR.setMinimumSize(new java.awt.Dimension(24, 24));
+        statUsR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statWwR.setEditable(false);
+        statWwR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statWwR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statWwR.setFocusable(false);
         statWwR.setMinimumSize(new java.awt.Dimension(24, 24));
         statWwR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statKR.setEditable(false);
+        statKR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statKR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statKR.setFocusable(false);
         statKR.setMinimumSize(new java.awt.Dimension(24, 24));
         statKR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statOdpR.setEditable(false);
+        statOdpR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOdpR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOdpR.setFocusable(false);
         statOdpR.setMinimumSize(new java.awt.Dimension(24, 24));
         statOdpR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statZrR.setEditable(false);
+        statZrR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statZrR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statZrR.setFocusable(false);
         statZrR.setMinimumSize(new java.awt.Dimension(24, 24));
         statZrR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statIntR.setEditable(false);
+        statIntR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statIntR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statIntR.setFocusable(false);
         statIntR.setMinimumSize(new java.awt.Dimension(24, 24));
         statIntR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statSwR.setEditable(false);
+        statSwR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statSwR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statSwR.setFocusable(false);
         statSwR.setMinimumSize(new java.awt.Dimension(24, 24));
         statSwR.setPreferredSize(new java.awt.Dimension(24, 24));
 
+        statOgdR.setEditable(false);
+        statOgdR.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOgdR.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         statOgdR.setFocusable(false);
         statOgdR.setMinimumSize(new java.awt.Dimension(24, 24));
         statOgdR.setPreferredSize(new java.awt.Dimension(24, 24));
 
-        statLabels.setText("WW   SS      K     ODP   ZR     INT   SW   OGD");
+        statLabels.setText("WW   US      K     ODP   ZR     INT   SW   OGD");
 
         jLabel4.setText("Rzuty");
 
@@ -199,6 +333,159 @@ public class PlayerCreation extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Ekwipunek");
+
+        jScrollPane2.setViewportView(jList2);
+
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Zdolności");
+
+        jScrollPane3.setViewportView(jList3);
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Umiejętności");
+
+        jScrollPane4.setViewportView(jList4);
+
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Profesje wejściowe");
+
+        jScrollPane5.setViewportView(jList5);
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("Profesje wyjściowe");
+
+        statWwA1.setEditable(false);
+        statWwA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statWwA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statWwA1.setFocusable(false);
+        statWwA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statWwA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statUsA1.setEditable(false);
+        statUsA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statUsA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statUsA1.setFocusable(false);
+        statUsA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statUsA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statKA1.setEditable(false);
+        statKA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statKA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statKA1.setFocusable(false);
+        statKA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statKA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statOdpA1.setEditable(false);
+        statOdpA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOdpA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statOdpA1.setFocusable(false);
+        statOdpA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statOdpA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statZrA1.setEditable(false);
+        statZrA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statZrA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statZrA1.setFocusable(false);
+        statZrA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statZrA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statIntA1.setEditable(false);
+        statIntA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statIntA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statIntA1.setFocusable(false);
+        statIntA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statIntA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statSwA1.setEditable(false);
+        statSwA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statSwA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statSwA1.setFocusable(false);
+        statSwA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statSwA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statOgdA1.setEditable(false);
+        statOgdA1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOgdA1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statOgdA1.setFocusable(false);
+        statOgdA1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statOgdA1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statOgdR1.setEditable(false);
+        statOgdR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOgdR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statOgdR1.setFocusable(false);
+        statOgdR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statOgdR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statSwR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statSwR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statSwR1.setFocusable(false);
+        statSwR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statSwR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statIntR1.setEditable(false);
+        statIntR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statIntR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statIntR1.setFocusable(false);
+        statIntR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statIntR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statZrR1.setEditable(false);
+        statZrR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statZrR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statZrR1.setFocusable(false);
+        statZrR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statZrR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statOdpR1.setEditable(false);
+        statOdpR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOdpR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statOdpR1.setFocusable(false);
+        statOdpR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statOdpR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statKR1.setEditable(false);
+        statKR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statKR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statKR1.setFocusable(false);
+        statKR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statKR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statUsR1.setEditable(false);
+        statUsR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statUsR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statUsR1.setFocusable(false);
+        statUsR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statUsR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statWwR1.setEditable(false);
+        statWwR1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statWwR1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statWwR1.setFocusable(false);
+        statWwR1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statWwR1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statUsPo1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statUsPo1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statUsPo1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statUsPo1.setPreferredSize(new java.awt.Dimension(24, 24));
+
+        statOgdPo1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        statOgdPo1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        statOgdPo1.setMinimumSize(new java.awt.Dimension(24, 24));
+        statOgdPo1.setPreferredSize(new java.awt.Dimension(24, 24));
+        statOgdPo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statOgdPo1ActionPerformed(evt);
+            }
+        });
+
+        statLabels1.setText("  A      Żyw    S      Wt     Sz    Mag   PO    PP");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,7 +493,7 @@ public class PlayerCreation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(characterName, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -217,32 +504,14 @@ public class PlayerCreation extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(professionList, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statWwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statSsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statKA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statOdpA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statZrA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statIntA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statSwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statOgdA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(statWwR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statSsR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(statUsR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(statKR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +529,7 @@ public class PlayerCreation extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(statWwPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statSsPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(statUsPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(statKPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,7 +542,92 @@ public class PlayerCreation extends javax.swing.JFrame {
                                 .addComponent(statSwPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(statOgdPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(statLabels, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(statLabels, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statWwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statUsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statKA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statOdpA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statZrA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statIntA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statSwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(statOgdA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 1, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(statLabels1)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(statWwR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statUsR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statKR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statOdpR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statZrR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statIntR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statSwR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statOgdR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(statUsPo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(156, 156, 156)
+                                            .addComponent(statOgdPo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addComponent(statWwA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statUsA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statKA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statOdpA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statZrA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statIntA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statSwA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(statOgdA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(confirm)))
@@ -296,7 +650,7 @@ public class PlayerCreation extends javax.swing.JFrame {
                     .addComponent(statZrPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statOdpPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statKPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statSsPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(statUsPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statWwPo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -309,21 +663,73 @@ public class PlayerCreation extends javax.swing.JFrame {
                     .addComponent(statZrR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statOdpR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statKR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statSsR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(statUsR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(statWwR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(statOgdA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statSwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statIntA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statZrA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statOdpA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statKA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statSsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statWwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(137, 137, 137)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(statOgdA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statSwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statIntA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statZrA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statOdpA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statKA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statUsA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statWwA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(statLabels1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel8))
+                                .addGap(137, 137, 137))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(statOgdPo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statUsPo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(statOgdR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statSwR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statIntR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statZrR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statOdpR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statKR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statUsR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statWwR1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(statOgdA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statSwA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statIntA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statZrA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statOdpA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statKA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statUsA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(statWwA1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(11, 11, 11)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(137, 137, 137))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(137, 137, 137))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(confirm)
                 .addContainerGap())
         );
@@ -343,10 +749,29 @@ public class PlayerCreation extends javax.swing.JFrame {
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmActionPerformed
+
+    private void statOgdPo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statOgdPo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statOgdPo1ActionPerformed
+
+    private void professionListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_professionListActionPerformed
+        Profession tempSel = ((Profession)professionList.getSelectedItem());
+        addedSkills=tempSel.getSkills();
+        addedTalents=tempSel.getTalents();
+        addedEntries=tempSel.getEntries();
+        addedExits=tempSel.getExits();
+        addedEq=tempSel.getEquipment();
+        
+        recalculate();        
+    }//GEN-LAST:event_professionListActionPerformed
+
+    private void raceListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raceListActionPerformed
+        recalculate();
+    }//GEN-LAST:event_raceListActionPerformed
     void clearStatsAll()
     {
         statWwPo.setText("");statWwR.setText("");statWwA.setText("");
-        statSsPo.setText("");statSsR.setText("");statSsA.setText("");
+        statUsPo.setText("");statUsR.setText("");statUsA.setText("");
         statKPo.setText("");statKR.setText("");statKA.setText("");
         statOdpPo.setText("");statOdpR.setText("");statOdpA.setText("");
         statZrPo.setText("");statZrR.setText("");statZrA.setText("");
@@ -354,8 +779,113 @@ public class PlayerCreation extends javax.swing.JFrame {
         statSwPo.setText("");statSwR.setText("");statSwA.setText("");
         statOgdPo.setText("");statOgdR.setText("");statOgdA.setText("");
     }
-    
-    
+    void recalculate()
+    {
+        Stats tempRace=new Stats();        
+        
+        switch(raceList.getSelectedItem().toString())
+        {
+            case "Człowiek": tempRace=races.getCzlowiek(); break;
+            case "Elf": tempRace=races.getElf(); break;
+            case "Krasnolud": tempRace=races.getKrasnolud(); break;
+            case "Niziołek": tempRace=races.getNiziolek(); break;
+        }        
+        Profession tempProfession=(Profession)professionList.getSelectedItem();
+        if(!professions.isEmpty())
+        {
+            statWwA.setText (""+tempProfession.getStats().getWW());
+            statUsA.setText (""+tempProfession.getStats().getUS());
+            statKA.setText  (""+tempProfession.getStats().getK());
+            statOdpA.setText(""+tempProfession.getStats().getODP());
+            statZrA.setText (""+tempProfession.getStats().getZR());
+            statIntA.setText(""+tempProfession.getStats().getINT());
+            statSwA.setText (""+tempProfession.getStats().getSW());
+            statOgdA.setText(""+tempProfession.getStats().getOGD());
+        }
+        int ww  = Integer.parseInt(!statWwPo.getText().equals("")?statWwPo.getText():"0")+tempRace.getWW();
+        int us  = Integer.parseInt(!statUsPo.getText().equals("")?statUsPo.getText():"0")+tempRace.getUS();
+        int k   = Integer.parseInt(!statKPo.getText().equals("")?statKPo.getText():"0")+tempRace.getK();
+        int odp = Integer.parseInt(!statOdpPo.getText().equals("")?statOdpPo.getText():"0")+tempRace.getODP();
+        int zr  = Integer.parseInt(!statZrPo.getText().equals("")?statZrPo.getText():"0")+tempRace.getZR();
+        int in  = Integer.parseInt(!statIntPo.getText().equals("")?statIntPo.getText():"0")+tempRace.getINT();
+        int sw  = Integer.parseInt(!statSwPo.getText().equals("")?statSwPo.getText():"0")+tempRace.getSW();
+        int ogd = Integer.parseInt(!statOgdPo.getText().equals("")?statOgdPo.getText():"0")+tempRace.getOGD();
+        int a   = 1;
+        int zyw = 0;
+        int s   = 0;
+        int wt  = 0;
+        int sz  = 0;
+        int mag = 0;
+        int po  = 0;
+        int pp  = 0;
+        
+        
+        statWwR.setText (""+ww);
+        statUsR.setText (""+us);
+        statKR.setText  (""+k);
+        statOdpR.setText(""+odp);
+        statZrR.setText (""+zr);
+        statIntR.setText(""+in);
+        statSwR.setText (""+sw);
+        statOgdR.setText(""+ogd); 
+        
+        statWwR1.setText (""+ww);
+        statUsR1.setText (""+us);
+        statKR1.setText  (""+k);
+        statOdpR1.setText(""+odp);
+        statZrR1.setText (""+zr);
+        statIntR1.setText(""+in);
+        statSwR1.setText (""+sw);
+        statOgdR1.setText(""+ogd); 
+        
+        
+                
+        arrayToModel(tempAddedSkills, addedSkills);
+        jList3.setModel(tempAddedSkills);
+        
+        arrayToModel(tempAddedTalents, addedTalents);
+        jList2.setModel(tempAddedTalents);
+        
+        arrayToModel(tempAddedEntries, addedEntries);
+        jList4.setModel(tempAddedEntries);
+        
+        arrayToModel(tempAddedExits, addedExits);
+        jList5.setModel(tempAddedExits);
+        
+        arrayToModel(tempAddedEq, addedEq);
+        jList1.setModel(tempAddedEq);
+        
+//        statWw;
+//        statUs;
+//        statK;
+//        statOdp;
+//        statZr;
+//        statInt;
+//        statSw;
+//        statOgd;
+        
+    }
+    void arrayToModel(DefaultListModel model, Object[] array)
+    {
+        try
+        {
+            if(array.length==0);
+        }catch(NullPointerException e)
+        {
+            return;
+        }
+        for(int i=0; i<array.length ; i++)
+        {
+            model.addElement(array[i]);
+        }
+    }
+    void arrayToModel(DefaultComboBoxModel model, Object[] array)
+    {
+        for(int i=0; i<array.length ; i++)
+        {
+            model.addElement(array[i]);
+        }
+    }
     
     /**
      * @param args the command line arguments
@@ -396,36 +926,70 @@ public class PlayerCreation extends javax.swing.JFrame {
     private javax.swing.JTextField characterName;
     private javax.swing.JButton confirm;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jList3;
+    private javax.swing.JList<String> jList4;
+    private javax.swing.JList<String> jList5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JComboBox<String> professionList;
     private javax.swing.JComboBox<String> raceList;
     private javax.swing.JTextField statIntA;
+    private javax.swing.JTextField statIntA1;
     private javax.swing.JTextField statIntPo;
     private javax.swing.JTextField statIntR;
+    private javax.swing.JTextField statIntR1;
     private javax.swing.JTextField statKA;
+    private javax.swing.JTextField statKA1;
     private javax.swing.JTextField statKPo;
     private javax.swing.JTextField statKR;
+    private javax.swing.JTextField statKR1;
     private javax.swing.JLabel statLabels;
+    private javax.swing.JLabel statLabels1;
     private javax.swing.JTextField statOdpA;
+    private javax.swing.JTextField statOdpA1;
     private javax.swing.JTextField statOdpPo;
     private javax.swing.JTextField statOdpR;
+    private javax.swing.JTextField statOdpR1;
     private javax.swing.JTextField statOgdA;
+    private javax.swing.JTextField statOgdA1;
     private javax.swing.JTextField statOgdPo;
+    private javax.swing.JTextField statOgdPo1;
     private javax.swing.JTextField statOgdR;
-    private javax.swing.JTextField statSsA;
-    private javax.swing.JTextField statSsPo;
-    private javax.swing.JTextField statSsR;
+    private javax.swing.JTextField statOgdR1;
     private javax.swing.JTextField statSwA;
+    private javax.swing.JTextField statSwA1;
     private javax.swing.JTextField statSwPo;
     private javax.swing.JTextField statSwR;
+    private javax.swing.JTextField statSwR1;
+    private javax.swing.JTextField statUsA;
+    private javax.swing.JTextField statUsA1;
+    private javax.swing.JTextField statUsPo;
+    private javax.swing.JTextField statUsPo1;
+    private javax.swing.JTextField statUsR;
+    private javax.swing.JTextField statUsR1;
     private javax.swing.JTextField statWwA;
+    private javax.swing.JTextField statWwA1;
     private javax.swing.JTextField statWwPo;
     private javax.swing.JTextField statWwR;
+    private javax.swing.JTextField statWwR1;
     private javax.swing.JTextField statZrA;
+    private javax.swing.JTextField statZrA1;
     private javax.swing.JTextField statZrPo;
     private javax.swing.JTextField statZrR;
+    private javax.swing.JTextField statZrR1;
     // End of variables declaration//GEN-END:variables
 }

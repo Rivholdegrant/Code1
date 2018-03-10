@@ -147,6 +147,7 @@ public class AddSkill extends javax.swing.JFrame {
             skills.add(new Skill(tname, tstat, tdesc, jCheckBox1.isSelected()));
             skills.get(skills.size()-1).show(); 
             clearFields();
+            skills.sort(null);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
