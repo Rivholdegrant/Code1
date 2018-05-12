@@ -6,6 +6,8 @@
 
 package zaliczeniepodstawyprogramowania;
 
+import java.util.HashSet;
+
 /**
  *
  * @author Rivs
@@ -94,19 +96,41 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Zad1 z1 = new Zad1();        
+        new Zad1();        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Zad2 z2 = new Zad2();   
+        new Zad2();   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Zad3 z3 = new Zad3();  
+         
+        HashSet<String> test1= new HashSet<String>();
+        HashSet<String> test2= new HashSet<String>();
+        
+        test1.add("Anna");
+        test1.add("Hanna");
+        test1.add("Wiola");
+        test1.add("Martyna");
+        test1.add("Luiza");
+        test1.add("Anna");
+        test1.add("Hanna");
+        
+        test2.add("Renata");
+        test2.add("Hanna");
+        test2.add("Sylwia");
+        test2.add("Weronika");
+        test2.add("Natalia");
+        
+        Zad3 z3 = new Zad3(test1, test2);  
+        
+        z3.product();
+        z3.sumNoRep();
+        z3.difference();        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        new Zad4();   
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
